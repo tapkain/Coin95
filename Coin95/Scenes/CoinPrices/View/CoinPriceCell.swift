@@ -10,20 +10,23 @@ import Foundation
 import UIKit
 
 class CoinPriceCell: UITableViewCell {
-
+  //static let identifier = String(describing: self)
+  static let identifier = "CoinPriceCell"
+  
+  @IBOutlet weak var priceChange: UILabel!
+  @IBOutlet weak var price: UILabel!
+  @IBOutlet weak var symbol: UILabel!
+  @IBOutlet weak var name: UILabel!
+  @IBOutlet weak var coinImage: UIImageView!
 }
 
 
 extension CoinPriceCell {
-  struct ViewModel {
-    let coinImage: UIImage
-    let coinName: String
-    let ticker: String
-    let priceChange: PriceChange
-    
-    struct PriceChange {
-      let delta: String
-      let color: UIColor
-    }
+  func bind(to viewModel: CoinPrices.CoinViewModel) {
+    priceChange.text = viewModel.priceChange.delta
+    priceChange.backgroundColor = viewModel.priceChange.color
+    price.text = viewModel.price
+    symbol.text = viewModel.symbol
+    name.text = viewModel.coinName
   }
 }

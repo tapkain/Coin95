@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CoinPriceCell" rowHeight="89" id="cPC-ID-TJQ">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CoinPriceCell" rowHeight="89" id="cPC-ID-TJQ" customClass="CoinPriceCell" customModule="Coin95" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="89"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cPC-ID-TJQ" id="tPs-RZ-u5f">
@@ -91,6 +91,13 @@
                                         <constraint firstItem="yiM-VV-cmZ" firstAttribute="leading" secondItem="j8y-XG-rJ0" secondAttribute="trailing" constant="8" id="qx7-S1-eib"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="coinImage" destination="j8y-XG-rJ0" id="OuA-5W-zak"/>
+                                    <outlet property="name" destination="4dK-NN-9Bp" id="cSK-5s-yKV"/>
+                                    <outlet property="price" destination="yiM-VV-cmZ" id="ECE-Y7-2fJ"/>
+                                    <outlet property="priceChange" destination="vwU-QF-cSg" id="uAa-Bx-fWd"/>
+                                    <outlet property="symbol" destination="dve-mi-l97" id="ZvI-kM-nwT"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

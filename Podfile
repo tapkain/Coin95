@@ -9,4 +9,5 @@ target 'Coin95' do
   pod 'RealmSwift'
   pod 'Reachability'
   pod 'Kingfisher'
+  pod 'Result'
 end

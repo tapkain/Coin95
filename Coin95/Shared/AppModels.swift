@@ -11,5 +11,9 @@ import Foundation
 enum AppModels {
   enum AppError: Error {
     case noInternetConnection
+    case noData
+    case badData
+    case requestError
+    case inMemoryIdentifierMissing
   }
 }

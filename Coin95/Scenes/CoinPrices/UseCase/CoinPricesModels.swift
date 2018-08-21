@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum CoinPrices {
 
@@ -21,12 +22,23 @@ enum CoinPrices {
   }
   
   struct Response {
-    let coins: [Coin]
+    let coins: [CoinPrice]
   }
   
   struct ViewModel {
-    
+    let coins: [CoinViewModel]
   }
   
-  
+  struct CoinViewModel {
+    let coinImage: UIImage?
+    let coinName: String
+    let symbol: String
+    let price: String
+    let priceChange: PriceChange
+    
+    struct PriceChange {
+      let delta: String
+      let color: UIColor
+    }
+  }
 }
