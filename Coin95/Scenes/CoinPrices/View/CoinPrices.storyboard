@@ -45,17 +45,17 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$6,134.18" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yiM-VV-cmZ">
-                                            <rect key="frame" x="68" y="47" width="100" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$16,134.18" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yiM-VV-cmZ">
+                                            <rect key="frame" x="68" y="47" width="85" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="uv7-wl-4nW"/>
+                                                <constraint firstAttribute="width" constant="85" id="uv7-wl-4nW"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-13.8%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwU-QF-cSg">
-                                            <rect key="frame" x="168" y="49" width="55" height="17"/>
+                                            <rect key="frame" x="163" y="49" width="55" height="17"/>
                                             <color key="backgroundColor" red="0.85043728351593018" green="0.21816034615039825" blue="0.15920260548591614" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="55" id="zPF-BB-MWm"/>
@@ -70,7 +70,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fby-WT-tDF" customClass="LineChartView" customModule="Charts">
-                                            <rect key="frame" x="231" y="0.0" width="144" height="89"/>
+                                            <rect key="frame" x="226" y="0.0" width="149" height="89"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
@@ -83,7 +83,7 @@
                                         <constraint firstItem="4dK-NN-9Bp" firstAttribute="top" secondItem="tPs-RZ-u5f" secondAttribute="topMargin" constant="5" id="VeC-qe-ugA"/>
                                         <constraint firstAttribute="bottom" secondItem="Fby-WT-tDF" secondAttribute="bottom" id="apa-65-1Zz"/>
                                         <constraint firstItem="Fby-WT-tDF" firstAttribute="leading" secondItem="vwU-QF-cSg" secondAttribute="trailing" constant="8" id="jKo-AC-caI"/>
-                                        <constraint firstItem="vwU-QF-cSg" firstAttribute="leading" secondItem="yiM-VV-cmZ" secondAttribute="trailing" id="l97-j1-dxN"/>
+                                        <constraint firstItem="vwU-QF-cSg" firstAttribute="leading" secondItem="yiM-VV-cmZ" secondAttribute="trailing" constant="10" id="l97-j1-dxN"/>
                                         <constraint firstItem="Fby-WT-tDF" firstAttribute="top" secondItem="tPs-RZ-u5f" secondAttribute="top" id="lDc-Na-m39"/>
                                         <constraint firstItem="dve-mi-l97" firstAttribute="centerX" secondItem="j8y-XG-rJ0" secondAttribute="centerX" id="mhb-nu-rJc"/>
                                         <constraint firstItem="j8y-XG-rJ0" firstAttribute="leading" secondItem="tPs-RZ-u5f" secondAttribute="leading" constant="10" id="qKt-sr-PsG"/>
@@ -96,6 +96,7 @@
                                     <outlet property="name" destination="4dK-NN-9Bp" id="cSK-5s-yKV"/>
                                     <outlet property="price" destination="yiM-VV-cmZ" id="ECE-Y7-2fJ"/>
                                     <outlet property="priceChange" destination="vwU-QF-cSg" id="uAa-Bx-fWd"/>
+                                    <outlet property="priceChart" destination="Fby-WT-tDF" id="MuW-XA-ofW"/>
                                     <outlet property="symbol" destination="dve-mi-l97" id="ZvI-kM-nwT"/>
                                 </connections>
                             </tableViewCell>
@@ -108,7 +109,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PT4-cS-byW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-114.40000000000001" y="79.610194902548727"/>
+            <point key="canvasLocation" x="-249" y="39"/>
         </scene>
     </scenes>
     <resources>

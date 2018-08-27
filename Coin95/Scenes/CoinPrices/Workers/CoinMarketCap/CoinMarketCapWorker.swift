@@ -7,25 +7,40 @@
 //
 
 import Foundation
-import Result
+import Promises
 
 extension CoinMarketCap {
   
   struct Worker: CoinPricesWorker {
     static let baseUrl = URL(string: "https://api.coinmarketcap.com/v2/")!
     
-    func fetchCoins(with request: CoinPrices.FetchRequest, _ completion: @escaping (Result<[CoinPrice], AppModels.AppError>) -> Void) {
-      URLSession.shared.dataTask(with: buildRequest(from: request)) { data, response, error in
-        completion(Result<CoinMarketCap.Tickers, AppModels.AppError>(data, response, error).flatMap {
-          var coinPrices = [CoinPrice]()
-          
-          for (_, ticker) in $0.data {
-            coinPrices.append(CoinPriceRealm(from: ticker))
-          }
-          
-          return .success(coinPrices)
-        })
-      }.resume()
+    func fetchCoins(with request: CoinPrices.FetchRequest) -> Promise<[CoinPrice]> {
+      return fetchCoinPrices(with: request).then {
+        return all($0.map { self.fetchHistory(for: $0)} )
+      }
+    }
+    
+    private func fetchCoinPrices(with request: CoinPrices.FetchRequest) -> Promise<[CoinPrice]> {
+      return URLSession.shared.dataTask(with: buildRequest(from: request)).then {
+        let tickers = try CoinMarketCap.Tickers.decode(from: $0)
+        var coinPrices = [CoinPrice]()
+        
+        for (_, ticker) in tickers.data {
+          coinPrices.append(CoinPrice(from: ticker))
+        }
+        
+        return Promise(coinPrices)
+      }
+    }
+    
+    private func fetchHistory(for coin: CoinPrice) -> Promise<CoinPrice> {
+      let request = CoinPrices.FetchRequest(symbol: coin.symbol)
+      
+      return CoinCap.Worker().fetchHistory(with: request).then {
+        coin.pricePoints.removeAll()
+        coin.pricePoints.append(objectsIn: $0)
+        return Promise(coin)
+      }
     }
     
     private func buildRequest(from request: CoinPrices.FetchRequest) -> URLRequest {

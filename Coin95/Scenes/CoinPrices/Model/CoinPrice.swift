@@ -1,5 +1,5 @@
 //
-//  Coin.swift
+//  CoinPriceRealm.swift
 //  Coin95
 //
 //  Created by Yevhen Velizhenkov on 8/21/18.
@@ -7,12 +7,12 @@
 //
 
 import Foundation
+import RealmSwift
 
-protocol CoinPrice {
-  init()
-  
-  var name: String { get set }
-  var symbol: String { get set }
-  var price: Double { get set }
-  var priceChange: Double { get set }
+class CoinPrice: Object {
+  @objc dynamic var name = ""
+  @objc dynamic var symbol = ""
+  @objc dynamic var price = 0.0
+  @objc dynamic var priceChange = 0.0
+  let pricePoints = List<Point>()
 }

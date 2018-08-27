@@ -21,25 +21,26 @@ struct CoinPricesInteractor {
 extension CoinPricesInteractor: CoinPricesBusinessLogic {
   
   func fetchCoins(with request: CoinPrices.FetchRequest) {
-    resolveWorker(from: request.source).fetchCoins(with: request) { result in
-      switch result {
-      case let .success(coins):
-        self.presenter.presentFetchedCoins(for: CoinPrices.Response(coins: coins))
-        
-      case .failure(.noInternetConnection):
-        print("No Internet")
-        
-      case .failure(.noData):
-        print("No data")
-
-      case .failure(.badData):
-        print("Bad data")
-
-      case .failure(.requestError):
-        print("Request error")
-      
-      default:
-        print("Default case")
+    resolveWorker(from: request.source).fetchCoins(with: request).then {
+      self.presenter.presentFetchedCoins(for: CoinPrices.Response(coins: $0))
+    }.catch {
+      if let error = $0 as? AppModels.AppError {
+        switch error {
+        case .noInternetConnection:
+          print("No Internet connection")
+          
+        case .badData:
+          print("bad data")
+          
+        case .noData:
+          print("no data")
+          
+        case .requestError:
+          print("bad request")
+          
+        default:
+          print("lol")
+        }
       }
     }
   }

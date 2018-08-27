@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Charts
+import RealmSwift
 
 struct CoinPricesPresenter {
 
@@ -28,7 +30,8 @@ extension CoinPricesPresenter: CoinPricesPresentable {
           coinImage: UIImage(named: "Zalypa"),
           coinName: $0.name,
           symbol: $0.symbol,
-          price: String($0.price),
+          price: Formatter.currency.string(from: $0.price)!,
+          priceChartData: priceChartData(for: $0.pricePoints),
           priceChange: CoinPrices.CoinViewModel.PriceChange(
             delta: String($0.priceChange),
             color: color(for: $0.priceChange)
@@ -46,7 +49,20 @@ extension CoinPricesPresenter: CoinPricesPresentable {
     
   }
   
-  func color(for priceChange: Double) -> UIColor {
+  private func priceChartData(for points: List<Point>) -> ChartData {
+    let dataSet = LineChartDataSet(values: points.map(pointToChartEntry), label: nil)
+    dataSet.drawCirclesEnabled = false
+    dataSet.lineWidth = 2
+    dataSet.drawFilledEnabled = true
+    
+    return LineChartData(dataSet: dataSet)
+  }
+  
+  private func pointToChartEntry(_ point: Point) -> ChartDataEntry {
+    return ChartDataEntry(x: point.x, y: point.y)
+  }
+  
+  private func color(for priceChange: Double) -> UIColor {
     switch priceChange {
     case 1...:
       return .green

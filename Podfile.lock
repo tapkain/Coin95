@@ -3,47 +3,42 @@ PODS:
     - Charts/Core (= 3.1.1)
   - Charts/Core (3.1.1)
   - Kingfisher (4.8.0)
+  - PromisesObjC (1.2.3)
+  - PromisesSwift (1.2.3):
+    - PromisesObjC (= 1.2.3)
   - Reachability (3.2)
   - Realm (3.7.4):
     - Realm/Headers (= 3.7.4)
   - Realm/Headers (3.7.4)
   - RealmSwift (3.7.4):
     - Realm (= 3.7.4)
-  - Result (4.0.0)
-  - RxCocoa (4.2.0):
-    - RxSwift (~> 4.0)
-  - RxSwift (4.2.0)
 
 DEPENDENCIES:
   - Charts
   - Kingfisher
+  - PromisesSwift
   - Reachability
   - RealmSwift
-  - Result
-  - RxCocoa
-  - RxSwift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Charts
     - Kingfisher
+    - PromisesObjC
+    - PromisesSwift
     - Reachability
     - Realm
     - RealmSwift
-    - Result
-    - RxCocoa
-    - RxSwift
 
 SPEC CHECKSUMS:
   Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
+  PromisesObjC: a3a4263d8a9260214267e0b3788d0f83466ad449
+  PromisesSwift: f7f45c21986419e85f7c5b645ed8c6a2c10c04b4
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Realm: a469bb59e33f9926102ccaea4349822c53b9117e
   RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
-  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
-  RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
-  RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
 
-PODFILE CHECKSUM: 69ac68af4569840c717630808ac00ae719473c82
+PODFILE CHECKSUM: 8db99bc536f66f78f28bfddd372d9884e873c88e
 
 COCOAPODS: 1.5.3

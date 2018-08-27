@@ -72,7 +72,7 @@ enum CoinMarketCap {
 
 
 extension CoinPrice {
-  init(from ticker: CoinMarketCap.Tickers.Ticker) {
+  convenience init(from ticker: CoinMarketCap.Tickers.Ticker) {
     self.init()
     
     name = ticker.name

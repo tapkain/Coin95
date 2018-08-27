@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Charts
 
 enum CoinPrices {
 
@@ -16,9 +17,27 @@ enum CoinPrices {
       case coinMarketCap
     }
     
+    init(source: Source, start: Int = 0, limit: Int = 100) {
+      self.source = source
+      self.start = start
+      self.limit = limit
+      self.symbol = ""
+      self.historyPeriod = 0
+    }
+    
+    init(symbol: String, historyPeriod: Int = 7) {
+      self.symbol = symbol
+      self.historyPeriod = historyPeriod
+      self.source = .coinMarketCap
+      self.start = 0
+      self.limit = 0
+    }
+    
     let source: Source
-    let start = 0
-    let limit = 100
+    let start: Int
+    let limit: Int
+    let symbol: String
+    let historyPeriod: Int
   }
   
   struct Response {
@@ -34,6 +53,7 @@ enum CoinPrices {
     let coinName: String
     let symbol: String
     let price: String
+    let priceChartData: Charts.ChartData
     let priceChange: PriceChange
     
     struct PriceChange {

@@ -25,16 +25,20 @@
 		795EF81621274D7000BFACB7 /* CoinPricesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795EF81521274D7000BFACB7 /* CoinPricesPresenter.swift */; };
 		795EF81B2127534A00BFACB7 /* CoinMarketCapWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795EF81A2127534A00BFACB7 /* CoinMarketCapWorker.swift */; };
 		7969C00D20FF15A600852919 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7969C00C20FF15A600852919 /* Assets.xcassets */; };
-		79B14630212C2BA50074A94A /* Result+URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B1462F212C2BA50074A94A /* Result+URLSession.swift */; };
+		799E88ED21343F3900454842 /* CoinCapWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799E88EC21343F3900454842 /* CoinCapWorker.swift */; };
+		799E88EF21343F5800454842 /* CoinCapDataTransferObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799E88EE21343F5800454842 /* CoinCapDataTransferObjects.swift */; };
+		799E88F1213448BF00454842 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799E88F0213448BF00454842 /* Point.swift */; };
+		799E88F32134648A00454842 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799E88F22134648A00454842 /* Formatter.swift */; };
+		79B14630212C2BA50074A94A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B1462F212C2BA50074A94A /* Network.swift */; };
 		79B14636212C3FC20074A94A /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B14635212C3FC20074A94A /* Storage.swift */; };
 		79B14638212C3FFE0074A94A /* PersistentObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B14637212C3FFE0074A94A /* PersistentObject.swift */; };
 		79B1463A212C41060074A94A /* Sorted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B14639212C41060074A94A /* Sorted.swift */; };
 		79B1463C212C4D6A0074A94A /* RealmStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B1463B212C4D6A0074A94A /* RealmStorage.swift */; };
 		79B1463E212C4E8A0074A94A /* StorageConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B1463D212C4E8A0074A94A /* StorageConfiguration.swift */; };
 		79B14640212C504C0074A94A /* FetchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B1463F212C504C0074A94A /* FetchResult.swift */; };
-		79B14645212C52DD0074A94A /* CoinPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B14644212C52DD0074A94A /* CoinPrice.swift */; };
-		79B14647212C53870074A94A /* CoinPriceRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B14646212C53870074A94A /* CoinPriceRealm.swift */; };
+		79B14647212C53870074A94A /* CoinPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B14646212C53870074A94A /* CoinPrice.swift */; };
 		79B1464A212C55100074A94A /* CoinMarketCapDataTransferObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B14649212C55100074A94A /* CoinMarketCapDataTransferObjects.swift */; };
+		79B1465C213035810074A94A /* ArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B1465B213035810074A94A /* ArrowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,16 +63,20 @@
 		7969C00220FF15A400852919 /* Coin95.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin95.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7969C00C20FF15A600852919 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7969C01120FF15A600852919 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		79B1462F212C2BA50074A94A /* Result+URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+URLSession.swift"; sourceTree = "<group>"; };
+		799E88EC21343F3900454842 /* CoinCapWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCapWorker.swift; sourceTree = "<group>"; };
+		799E88EE21343F5800454842 /* CoinCapDataTransferObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCapDataTransferObjects.swift; sourceTree = "<group>"; };
+		799E88F0213448BF00454842 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		799E88F22134648A00454842 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		79B1462F212C2BA50074A94A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		79B14635212C3FC20074A94A /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		79B14637212C3FFE0074A94A /* PersistentObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentObject.swift; sourceTree = "<group>"; };
 		79B14639212C41060074A94A /* Sorted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sorted.swift; sourceTree = "<group>"; };
 		79B1463B212C4D6A0074A94A /* RealmStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorage.swift; sourceTree = "<group>"; };
 		79B1463D212C4E8A0074A94A /* StorageConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageConfiguration.swift; sourceTree = "<group>"; };
 		79B1463F212C504C0074A94A /* FetchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchResult.swift; sourceTree = "<group>"; };
-		79B14644212C52DD0074A94A /* CoinPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPrice.swift; sourceTree = "<group>"; };
-		79B14646212C53870074A94A /* CoinPriceRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPriceRealm.swift; sourceTree = "<group>"; };
+		79B14646212C53870074A94A /* CoinPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPrice.swift; sourceTree = "<group>"; };
 		79B14649212C55100074A94A /* CoinMarketCapDataTransferObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketCapDataTransferObjects.swift; sourceTree = "<group>"; };
+		79B1465B213035810074A94A /* ArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowView.swift; sourceTree = "<group>"; };
 		94CC90EDE360C18497B79772 /* Pods-Coin95.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin95.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin95/Pods-Coin95.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,10 +112,12 @@
 		795EF7E9211F1B9300BFACB7 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				79B1465A213035730074A94A /* Views */,
 				79B14634212C3FB10074A94A /* Storage */,
 				795EF7EA211F1BA500BFACB7 /* Coordinator.swift */,
 				795EF80021202B5400BFACB7 /* AppModels.swift */,
-				79B1462F212C2BA50074A94A /* Result+URLSession.swift */,
+				79B1462F212C2BA50074A94A /* Network.swift */,
+				799E88F22134648A00454842 /* Formatter.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -186,6 +196,7 @@
 		795EF817212750BC00BFACB7 /* Workers */ = {
 			isa = PBXGroup;
 			children = (
+				799E88EB21343F2700454842 /* CoinCap */,
 				79B14648212C54DA0074A94A /* CoinMarketCap */,
 			);
 			path = Workers;
@@ -220,6 +231,15 @@
 			path = Coin95;
 			sourceTree = "<group>";
 		};
+		799E88EB21343F2700454842 /* CoinCap */ = {
+			isa = PBXGroup;
+			children = (
+				799E88EC21343F3900454842 /* CoinCapWorker.swift */,
+				799E88EE21343F5800454842 /* CoinCapDataTransferObjects.swift */,
+			);
+			path = CoinCap;
+			sourceTree = "<group>";
+		};
 		79B14634212C3FB10074A94A /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,8 +256,8 @@
 		79B14643212C52CF0074A94A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				79B14644212C52DD0074A94A /* CoinPrice.swift */,
-				79B14646212C53870074A94A /* CoinPriceRealm.swift */,
+				79B14646212C53870074A94A /* CoinPrice.swift */,
+				799E88F0213448BF00454842 /* Point.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -256,6 +276,14 @@
 			children = (
 			);
 			path = NewsFeed;
+			sourceTree = "<group>";
+		};
+		79B1465A213035730074A94A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				79B1465B213035810074A94A /* ArrowView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,23 +382,21 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Coin95/Pods-Coin95-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework",
 				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Promises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -386,27 +412,31 @@
 			files = (
 				795EF8102127330300BFACB7 /* CoinPricesUseCases.swift in Sources */,
 				795EF8122127333C00BFACB7 /* CoinPricesModels.swift in Sources */,
+				799E88EF21343F5800454842 /* CoinCapDataTransferObjects.swift in Sources */,
 				79B1463A212C41060074A94A /* Sorted.swift in Sources */,
 				79B1464A212C55100074A94A /* CoinMarketCapDataTransferObjects.swift in Sources */,
+				799E88F32134648A00454842 /* Formatter.swift in Sources */,
 				795EF7DF20FF223900BFACB7 /* AppDelegate.swift in Sources */,
 				795EF7F1211F20C500BFACB7 /* SettingsCoordinator.swift in Sources */,
 				79B14640212C504C0074A94A /* FetchResult.swift in Sources */,
+				79B1465C213035810074A94A /* ArrowView.swift in Sources */,
 				795EF81621274D7000BFACB7 /* CoinPricesPresenter.swift in Sources */,
 				795EF7EB211F1BA500BFACB7 /* Coordinator.swift in Sources */,
 				79B1463C212C4D6A0074A94A /* RealmStorage.swift in Sources */,
 				795EF7E520FF239200BFACB7 /* SettingsViewController.swift in Sources */,
 				795EF7E320FF237500BFACB7 /* CoinPricesViewController.swift in Sources */,
+				799E88ED21343F3900454842 /* CoinCapWorker.swift in Sources */,
 				795EF7ED211F1BCF00BFACB7 /* AppCoordinator.swift in Sources */,
-				79B14645212C52DD0074A94A /* CoinPrice.swift in Sources */,
 				795EF7EF211F20B900BFACB7 /* CoinPricesCoordinator.swift in Sources */,
 				79B14638212C3FFE0074A94A /* PersistentObject.swift in Sources */,
 				795EF81B2127534A00BFACB7 /* CoinMarketCapWorker.swift in Sources */,
-				79B14630212C2BA50074A94A /* Result+URLSession.swift in Sources */,
+				79B14630212C2BA50074A94A /* Network.swift in Sources */,
 				79B1463E212C4E8A0074A94A /* StorageConfiguration.swift in Sources */,
 				795EF80121202B5400BFACB7 /* AppModels.swift in Sources */,
 				795EF7FD211F3ADC00BFACB7 /* CoinPriceCell.swift in Sources */,
+				799E88F1213448BF00454842 /* Point.swift in Sources */,
 				79B14636212C3FC20074A94A /* Storage.swift in Sources */,
-				79B14647212C53870074A94A /* CoinPriceRealm.swift in Sources */,
+				79B14647212C53870074A94A /* CoinPrice.swift in Sources */,
 				795EF81421274C6100BFACB7 /* CoinPricesInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,7 +18,7 @@ class CoinPricesViewController: UITableViewController {
     super.viewDidLoad()
     initTableView()
     view.backgroundColor = .red
-    interactor.fetchCoins(with: CoinPrices.FetchRequest(source: .coinMarketCap))
+    interactor.fetchCoins(with: CoinPrices.FetchRequest(source: .coinMarketCap, start: 0, limit: 3))
   }
   
   func initTableView() {

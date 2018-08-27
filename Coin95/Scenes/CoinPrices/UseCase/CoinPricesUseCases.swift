@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Result
+import Promises
 
 protocol CoinPricesView: class {
   func displayFetchedCoins(with viewModel: CoinPrices.ViewModel)
@@ -24,5 +24,5 @@ protocol CoinPricesPresentable {
 }
 
 protocol CoinPricesWorker {
-  func fetchCoins(with request: CoinPrices.FetchRequest, _ completion: @escaping (Result<[CoinPrice], AppModels.AppError>) -> Void)
+  func fetchCoins(with request: CoinPrices.FetchRequest) -> Promise<[CoinPrice]>
 }
