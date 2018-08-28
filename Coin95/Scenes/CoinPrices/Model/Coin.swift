@@ -1,5 +1,5 @@
 //
-//  CoinPriceRealm.swift
+//  Coin.swift
 //  Coin95
 //
 //  Created by Yevhen Velizhenkov on 8/21/18.
@@ -9,10 +9,16 @@
 import Foundation
 import RealmSwift
 
-class CoinPrice: Object {
+class Coin: Object {
   @objc dynamic var name = ""
   @objc dynamic var symbol = ""
-  @objc dynamic var price = 0.0
   @objc dynamic var priceChange = 0.0
+  @objc dynamic var imageUrl: String?
+  
+  let prices = List<Price>()
   let pricePoints = List<Point>()
+  
+  func price(for currency: String) -> Double? {
+    return prices.first(where: { $0.currency == currency })?.value
+  }
 }

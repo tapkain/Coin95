@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Charts
+import Kingfisher
 
 class CoinPriceCell: UITableViewCell {
   //static let identifier = String(describing: self)
@@ -30,6 +31,10 @@ extension CoinPriceCell {
     price.text = viewModel.price
     symbol.text = viewModel.symbol
     name.text = viewModel.coinName
+    
+    if let imageUrl = viewModel.imageUrl {
+      coinImage.kf.setImage(with: imageUrl)
+    }
     
     priceChart.drawBordersEnabled = false
     priceChart.drawGridBackgroundEnabled = false

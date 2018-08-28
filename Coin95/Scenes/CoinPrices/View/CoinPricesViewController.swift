@@ -10,6 +10,12 @@ import UIKit
 
 class CoinPricesViewController: UITableViewController {
   
+  enum State {
+    case fullFetch
+    case lazyFetch
+    case displayingCoins
+  }
+  
   private lazy var interactor: CoinPricesBusinessLogic = CoinPricesInteractor(presenter: CoinPricesPresenter(view: self))
   
   private var viewModel = CoinPrices.ViewModel(coins: [])
@@ -18,7 +24,7 @@ class CoinPricesViewController: UITableViewController {
     super.viewDidLoad()
     initTableView()
     view.backgroundColor = .red
-    interactor.fetchCoins(with: CoinPrices.FetchRequest(source: .coinMarketCap, start: 0, limit: 3))
+    interactor.fetchCoins(with: CoinPrices.FetchRequest.initial)
   }
   
   func initTableView() {

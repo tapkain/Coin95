@@ -13,35 +13,22 @@ import Charts
 enum CoinPrices {
 
   struct FetchRequest {
-    enum Source {
-      case coinMarketCap
+    enum Exchanges: String {
+      case coinbase
+      case kraken
+      case binance
+      case general = "CCCAGG"
     }
     
-    init(source: Source, start: Int = 0, limit: Int = 100) {
-      self.source = source
-      self.start = start
-      self.limit = limit
-      self.symbol = ""
-      self.historyPeriod = 0
-    }
-    
-    init(symbol: String, historyPeriod: Int = 7) {
-      self.symbol = symbol
-      self.historyPeriod = historyPeriod
-      self.source = .coinMarketCap
-      self.start = 0
-      self.limit = 0
-    }
-    
-    let source: Source
-    let start: Int
-    let limit: Int
+    let exchange: Exchanges
     let symbol: String
-    let historyPeriod: Int
+    let toSymbol: String
+    
+    static let initial = FetchRequest(exchange: .general, symbol: "", toSymbol: "USD,EUR")
   }
   
   struct Response {
-    let coins: [CoinPrice]
+    let coins: [Coin]
   }
   
   struct ViewModel {
@@ -49,8 +36,8 @@ enum CoinPrices {
   }
   
   struct CoinViewModel {
-    let coinImage: UIImage?
     let coinName: String
+    let imageUrl: URL?
     let symbol: String
     let price: String
     let priceChartData: Charts.ChartData

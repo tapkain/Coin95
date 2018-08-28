@@ -13,36 +13,33 @@ extension URLSession {
   func dataTask(with request: URLRequest) -> Promise<Data> {
     return Promise { fulfill, reject in
       self.dataTask(with: request) { data, response, error in
-        var validationError = error
-        let result = Network.validate(data, response, &validationError)
         
-        if let error = validationError {
+        do {
+          fulfill(try Network.validate(data, response, error))
+        } catch let error {
           reject(error)
-          return
         }
         
-        fulfill(result)
       }.resume()
     }
   }
 }
 
 struct Network {
-  static func validate(_ data: Data?, _ response: URLResponse?, _ error: inout Error?) -> Data {
+  static func validate(_ data: Data?, _ response: URLResponse?, _ error: Error?) throws -> Data {
     if let _ = error {
-      error = AppModels.AppError.requestError
-      return Data()
+      throw AppModels.AppError.requestError
     }
     
     if let response = response as? HTTPURLResponse, (400..<600).contains(response.statusCode) {
-      error = AppModels.AppError.requestError
-      return Data()
+      throw AppModels.AppError.requestError
     }
     
     guard let data = data else {
-      error = AppModels.AppError.noData
-      return Data()
+      throw AppModels.AppError.noData
     }
+    
+    //print("DATA RECEIVED: \(ByteCountFormatter().string(fromByteCount: Int64(data.count)))")
     
     return data
   }

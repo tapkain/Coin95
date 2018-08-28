@@ -27,10 +27,10 @@ extension CoinPricesPresenter: CoinPricesPresentable {
     let viewModel = CoinPrices.ViewModel(
       coins: response.coins.map {
         CoinPrices.CoinViewModel(
-          coinImage: UIImage(named: "Zalypa"),
           coinName: $0.name,
+          imageUrl: URL(string: $0.imageUrl ?? ""),
           symbol: $0.symbol,
-          price: Formatter.currency.string(from: $0.price)!,
+          price: Formatter.currency.string(from: $0.price(for: "USD") ?? 0.0)!,
           priceChartData: priceChartData(for: $0.pricePoints),
           priceChange: CoinPrices.CoinViewModel.PriceChange(
             delta: String($0.priceChange),
