@@ -1,8 +1,8 @@
 //
-//  Coin.swift
+//  CoinRealm.swift
 //  Coin95
 //
-//  Created by Yevhen Velizhenkov on 8/21/18.
+//  Created by Yevhen Velizhenkov on 8/29/18.
 //  Copyright © 2018 Yevhen Velizhenkov. All rights reserved.
 //
 
