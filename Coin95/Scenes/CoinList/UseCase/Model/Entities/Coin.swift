@@ -10,12 +10,13 @@ import Foundation
 import RealmSwift
 import CryptoCompareAPI
 
-class Coin: Object {
+final class Coin: Object {
   @objc dynamic var name = ""
   @objc dynamic var symbol = ""
   @objc dynamic var imageUrlString: String?
   
   let tradingInfo = List<TradingInfo>()
+  let historicalInfo = List<CoinHistoryEntry>()
   
   override static func primaryKey() -> String? {
     return "symbol"
@@ -37,11 +38,5 @@ extension Coin {
       
       return URL(string: imageUrlString)
     }
-  }
-  
-  func tradingInfo(for currency: String, exchange: Exchange) -> TradingInfo {
-    return tradingInfo.first(where: {
-      $0.currency == currency && $0.exchange == exchange
-    })!
   }
 }

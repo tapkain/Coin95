@@ -9,7 +9,8 @@
 import UIKit
 import RealmSwift
 
-class CoinPricesViewController: UITableViewController {
+class CoinListViewController: UITableViewController, ViewController {
+  typealias ViewModel = CoinListViewModel
   
   enum State {
     case fullFetch
@@ -17,20 +18,24 @@ class CoinPricesViewController: UITableViewController {
     case displayingCoins
   }
   
-  private lazy var interactor: CoinPricesBusinessLogic = CoinPricesInteractor(presenter: CoinPricesPresenter(view: self))
-  
-  private var viewModel = CoinPrices.ViewModel()
+  var useCase: CoinListUseCase!
+  private var viewModel = ViewModel()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "All Coins"
-    interactor.fetchCoins(with: CoinPrices.FetchRequest.initial)
+    let request = CoinListRequest(
+      fromSymbol: "BTC",
+      toSymbol: "USD",
+      exchange: "Kraken")
+    
+    _ = useCase.fetchCoins(request)
   }
 }
 
 
-extension CoinPricesViewController: CoinPricesView {
-  func displayFetchedCoins(with viewModel: CoinPrices.ViewModel) {
+extension CoinListViewController: CoinListView {
+  func displayFetchedCoins(with viewModel: ViewModel) {
     self.viewModel = viewModel
     tableView.reloadData()
   }
@@ -38,20 +43,24 @@ extension CoinPricesViewController: CoinPricesView {
   func display(error: AppModels.AppError) {
     
   }
+  
+  func refreshView() {
+    tableView.reloadData()
+  }
 }
 
 
-extension CoinPricesViewController {
+extension CoinListViewController {
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return viewModel.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return tableView.dequeueReusableCell(withIdentifier: CoinPriceCell.identifier, for: indexPath)
+    return tableView.dequeueReusableCell(withIdentifier: CoinListCell.identifier, for: indexPath)
   }
   
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    guard let cell = cell as? CoinPriceCell else {
+    guard let cell = cell as? CoinListCell else {
       return
     }
     

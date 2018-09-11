@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import CryptoCompareAPI
 
-extension TradingInfo: Storage {}
+extension TradingInfo: Repository {}
 
 
 extension WriteTransaction {

@@ -30,11 +30,15 @@ class WriteTransaction {
   }
 }
 
-protocol Storage where Self: Object {
+protocol Repository where Self: Object {
+  typealias FetchResult = Results<Self>
+  
   static func write(_ block: (WriteTransaction) throws -> Void) throws
+  static func fetch(_ predicate: NSPredicate) -> FetchResult
+  static func fetchAll() -> FetchResult
 }
 
-extension Storage {
+extension Repository {
   static func write(_ block: (WriteTransaction) throws -> Void) throws {
     let realm = try Realm()
     let transaction = WriteTransaction(realm: realm)
@@ -42,5 +46,15 @@ extension Storage {
     try realm.write {
       try block(transaction)
     }
+  }
+  
+  static func fetch(_ predicate: NSPredicate) -> FetchResult {
+    let realm = try! Realm()
+    return realm.objects(Self.self).filter(predicate)
+  }
+  
+  static func fetchAll() -> FetchResult {
+    let realm = try! Realm()
+    return realm.objects(Self.self)
   }
 }

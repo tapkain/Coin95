@@ -11,9 +11,9 @@ import UIKit
 import Charts
 import Kingfisher
 
-class CoinPriceCell: UITableViewCell {
+class CoinListCell: UITableViewCell {
   //static let identifier = String(describing: self)
-  static let identifier = "CoinPriceCell"
+  static let identifier = "CoinListCell"
   
   @IBOutlet weak var priceChart: LineChartView!
   @IBOutlet weak var priceChange: UILabel!
@@ -24,8 +24,8 @@ class CoinPriceCell: UITableViewCell {
 }
 
 
-extension CoinPriceCell {
-  func bind(to viewModel: CoinPrices.CoinViewModel) {
+extension CoinListCell {
+  func bind(to viewModel: CoinViewModel) {
     priceChange.text = viewModel.priceChange.delta
     priceChange.backgroundColor = viewModel.priceChange.color
     price.text = viewModel.price

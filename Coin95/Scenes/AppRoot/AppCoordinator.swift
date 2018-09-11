@@ -12,7 +12,7 @@ import UIKit
 class AppCoordinator: Coordinator {
   
   let rootViewController = UITabBarController()
-  let coinPricesCoordinator = CoinPricesCoordinator()
+  let coinPricesCoordinator = CoinListCoordinator()
   let settingsCoordinator = SettingsCoordinator()
   
   var coinPrices: UIViewController {

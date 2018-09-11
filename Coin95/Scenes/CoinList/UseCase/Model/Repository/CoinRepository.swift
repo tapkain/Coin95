@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import CryptoCompareAPI
 
-extension Coin: Storage {}
+extension Coin: Repository {}
 
 
 extension WriteTransaction {

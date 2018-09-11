@@ -1,5 +1,5 @@
 //
-//  Price.swift
+//  TradingInfo.swift
 //  Coin95
 //
 //  Created by Yevhen Velizhenkov on 8/28/18.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import CryptoCompareAPI
 
-class TradingInfo: Object {
+final class TradingInfo: Object {
   @objc dynamic var currency = ""
   @objc dynamic var volume = 0.0
   @objc dynamic var totalVolume = 0.0
@@ -20,6 +20,8 @@ class TradingInfo: Object {
   @objc dynamic var exchangeString = ""
   @objc dynamic var symbol = ""
   @objc dynamic var id = ""
+
+  let coins = LinkingObjects(fromType: Coin.self, property: "tradingInfo")
   
   override static func primaryKey() -> String? {
     return "id"
