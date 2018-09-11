@@ -2,19 +2,21 @@ PODS:
   - Charts (3.1.1):
     - Charts/Core (= 3.1.1)
   - Charts/Core (3.1.1)
-  - Kingfisher (4.8.0)
+  - CryptoCompareAPI (0.2.5)
+  - Kingfisher (4.9.0)
   - PromisesObjC (1.2.3)
   - PromisesSwift (1.2.3):
     - PromisesObjC (= 1.2.3)
   - Reachability (3.2)
-  - Realm (3.7.4):
-    - Realm/Headers (= 3.7.4)
-  - Realm/Headers (3.7.4)
-  - RealmSwift (3.7.4):
-    - Realm (= 3.7.4)
+  - Realm (3.8.0):
+    - Realm/Headers (= 3.8.0)
+  - Realm/Headers (3.8.0)
+  - RealmSwift (3.8.0):
+    - Realm (= 3.8.0)
 
 DEPENDENCIES:
   - Charts
+  - CryptoCompareAPI
   - Kingfisher
   - PromisesSwift
   - Reachability
@@ -23,6 +25,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Charts
+    - CryptoCompareAPI
     - Kingfisher
     - PromisesObjC
     - PromisesSwift
@@ -32,13 +35,14 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
-  Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
+  CryptoCompareAPI: 05055229ae408e8e0504db715e420ab505d4934a
+  Kingfisher: 64539b51826b778206daa6ed815d12653caa69dd
   PromisesObjC: a3a4263d8a9260214267e0b3788d0f83466ad449
   PromisesSwift: f7f45c21986419e85f7c5b645ed8c6a2c10c04b4
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  Realm: a469bb59e33f9926102ccaea4349822c53b9117e
-  RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
+  Realm: 3fdae59de78838064e9f77638d7cdb7b8cff9dc8
+  RealmSwift: c990518b800e106d1f77099d3a4648c3b100337d
 
-PODFILE CHECKSUM: 8db99bc536f66f78f28bfddd372d9884e873c88e
+PODFILE CHECKSUM: a691b43e7c6c43bb42b0f22de69a1e6e50d43286
 
 COCOAPODS: 1.5.3

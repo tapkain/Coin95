@@ -8,17 +8,40 @@
 
 import Foundation
 import RealmSwift
+import CryptoCompareAPI
 
 class Coin: Object {
   @objc dynamic var name = ""
   @objc dynamic var symbol = ""
-  @objc dynamic var priceChange = 0.0
-  @objc dynamic var imageUrl: String?
+  @objc dynamic var imageUrlString: String?
   
-  let prices = List<Price>()
-  let pricePoints = List<Point>()
+  let tradingInfo = List<TradingInfo>()
   
-  func price(for currency: String) -> Double? {
-    return prices.first(where: { $0.currency == currency })?.value
+  override static func primaryKey() -> String? {
+    return "symbol"
+  }
+}
+
+
+// MARK: - Computed propertires & helpers
+extension Coin {
+  var imageUrl: URL? {
+    set {
+      imageUrlString = newValue?.absoluteString
+    }
+    
+    get {
+      guard let imageUrlString = imageUrlString else {
+        return nil
+      }
+      
+      return URL(string: imageUrlString)
+    }
+  }
+  
+  func tradingInfo(for currency: String, exchange: Exchange) -> TradingInfo {
+    return tradingInfo.first(where: {
+      $0.currency == currency && $0.exchange == exchange
+    })!
   }
 }

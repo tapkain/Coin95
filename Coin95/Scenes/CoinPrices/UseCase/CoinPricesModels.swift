@@ -9,30 +9,39 @@
 import Foundation
 import UIKit
 import Charts
+import CryptoCompareAPI
+import RealmSwift
 
 enum CoinPrices {
 
   struct FetchRequest {
-    enum Exchanges: String {
-      case coinbase
-      case kraken
-      case binance
-      case general = "CCCAGG"
-    }
     
-    let exchange: Exchanges
+    let exchange: Exchange
     let symbol: String
     let toSymbol: String
     
-    static let initial = FetchRequest(exchange: .general, symbol: "", toSymbol: "USD,EUR")
+    static let initial = FetchRequest(exchange: .defaultMarket, symbol: "", toSymbol: "USD,EUR")
   }
   
   struct Response {
-    let coins: [Coin]
+    let coins: Results<Coin>
   }
   
   struct ViewModel {
-    let coins: [CoinViewModel]
+    var coins: Results<Coin>!
+    var setup: ((Coin) -> CoinViewModel)!
+    
+    var count: Int {
+      guard let coins = coins else {
+        return 0
+      }
+      return coins.count
+    }
+    
+    init(coins: Results<Coin>! = nil, setup: ((Coin) -> CoinViewModel)! = nil) {
+      self.coins = coins
+      self.setup = setup
+    }
   }
   
   struct CoinViewModel {

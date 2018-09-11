@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class CoinPricesViewController: UITableViewController {
   
@@ -18,17 +19,12 @@ class CoinPricesViewController: UITableViewController {
   
   private lazy var interactor: CoinPricesBusinessLogic = CoinPricesInteractor(presenter: CoinPricesPresenter(view: self))
   
-  private var viewModel = CoinPrices.ViewModel(coins: [])
+  private var viewModel = CoinPrices.ViewModel()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    initTableView()
-    view.backgroundColor = .red
+    title = "All Coins"
     interactor.fetchCoins(with: CoinPrices.FetchRequest.initial)
-  }
-  
-  func initTableView() {
-    //tableView.register(CoinPriceCell.self, forCellReuseIdentifier: CoinPriceCell.identifier)
   }
 }
 
@@ -47,7 +43,7 @@ extension CoinPricesViewController: CoinPricesView {
 
 extension CoinPricesViewController {
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return viewModel.coins.count
+    return viewModel.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,7 +55,10 @@ extension CoinPricesViewController {
       return
     }
     
-    cell.bind(to: viewModel.coins[indexPath.row])
+    let coin = viewModel.coins[indexPath.row]
+    let cellViewModel = viewModel.setup(coin)
+    
+    cell.bind(to: cellViewModel)
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

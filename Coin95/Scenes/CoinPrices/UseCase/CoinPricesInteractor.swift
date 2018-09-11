@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import Reachability
+import RealmSwift //REMOVE
 
 struct CoinPricesInteractor {
 
-  private let worker: CoinPricesWorker = CryptoCompareApi()
+  private let worker: CoinPricesWorker = CoinPrices.Worker()
   private let presenter: CoinPricesPresentable
   
   init(presenter: CoinPricesPresentable) {
@@ -22,17 +24,36 @@ struct CoinPricesInteractor {
 extension CoinPricesInteractor: CoinPricesBusinessLogic {
   
   func fetchCoins(with request: CoinPrices.FetchRequest) {
-    worker.fetchCoins(with: request).then {
-      print("PRESENTER: \($0.count)")
-      self.presenter.presentFetchedCoins(for: CoinPrices.Response(coins: $0))
-    }.catch {
-      if let error = $0 as? AppModels.AppError {
-        self.handle(error: error)
-      }
+    if shouldFetchFromAPI() {
+      fetchFromAPI(with: request)
+    } else {
+      fetchFromLocalStorage(with: request)
     }
   }
   
-  private func handle(error: AppModels.AppError) {
-    print(error.description)
+  private func fetchFromAPI(with request: CoinPrices.FetchRequest) {
+    worker.fetchCoins(with: request).then {_ in
+      self.fetchFromLocalStorage(with: request)
+    }.catch {
+      self.handle(error: $0)
+    }
+  }
+  
+  private func shouldFetchFromAPI() -> Bool {
+    return Reachability.forInternetConnection().isReachable()
+  }
+  
+  private func fetchFromLocalStorage(with request: CoinPrices.FetchRequest) {
+    //TODO: workaround
+    DispatchQueue.main.async {
+      let realm = try! Realm()
+      let coins = realm.objects(Coin.self)
+      let response = CoinPrices.Response(coins: coins)
+      self.presenter.presentFetchedCoins(for: response)
+    }
+  }
+  
+  private func handle(error: Error) {
+    print(error.localizedDescription)
   }
 }

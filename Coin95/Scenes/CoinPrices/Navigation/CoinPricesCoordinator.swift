@@ -16,5 +16,6 @@ class CoinPricesCoordinator: Coordinator {
   func start() {
     let coinPricesController = UIStoryboard(name: "CoinPrices", bundle: .main).instantiateInitialViewController()
     rootViewController = UINavigationController(rootViewController: coinPricesController!)
+    rootViewController.navigationBar.prefersLargeTitles = true
   }
 }

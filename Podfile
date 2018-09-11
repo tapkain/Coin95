@@ -8,4 +8,5 @@ target 'Coin95' do
   pod 'RealmSwift'
   pod 'Reachability'
   pod 'Kingfisher'
+  pod 'CryptoCompareAPI'
 end

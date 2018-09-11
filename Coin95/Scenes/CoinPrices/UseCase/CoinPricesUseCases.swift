@@ -24,5 +24,5 @@ protocol CoinPricesPresentable {
 }
 
 protocol CoinPricesWorker {
-  func fetchCoins(with request: CoinPrices.FetchRequest) -> Promise<[Coin]>
+  func fetchCoins(with request: CoinPrices.FetchRequest) -> Promise<Void>
 }
