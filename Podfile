@@ -11,4 +11,5 @@ target 'Coin95' do
   pod 'CryptoCompareAPI'
   pod 'SkeletonView'
   pod 'Hero'
+  pod 'SwifterSwift'
 end

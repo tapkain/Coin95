@@ -9,6 +9,6 @@
 import Foundation
 
 protocol CoinListPresentable {
-  func present(coins: Coin.FetchResult, _ request: CoinListRequest)
+  func present(coins: Coin.FetchResult, _ request: CoinListRequest) -> CoinListViewModel
   func present(error: AppModels.AppError)
 }

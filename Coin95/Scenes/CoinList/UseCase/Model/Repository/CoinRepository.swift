@@ -11,11 +11,26 @@ import RealmSwift
 import CryptoCompareAPI
 
 extension Coin: Repository {
-  static func fetchAll() -> FetchResult {
+  static func fetchAll(for filter: CoinListRequest) -> FetchResult {
     let realm = try! Realm()
-    let info = realm.objects(TradingInfo.self).filter("totalVolume != 0").sorted(byKeyPath: "marketCap")
-    let s = realm.objects(Coin.self).filter("tradingInfo.@count > 0").filter("symbol in %@", info.value(forKeyPath: "coin.symbol")!)
-    return s
+    
+    let info = realm.objects(TradingInfo.self)
+      .filter("totalVolume != 0")
+      .filter("exchangeString == %@", filter.exchange)
+      .sorted(byKeyPath: filter.sortBy.rawValue)
+    
+    let coins = realm.objects(Coin.self)
+      .filter("tradingInfo.@count > 0")
+      .filter("symbol in %@", info.value(forKeyPath: "coin.symbol")!)
+    
+    switch filter.searchBy {
+    case .name(let value):
+      return coins.filter("symbol LIKE[c] %@ || name LIKE[c] %@", value, value)
+    default:
+      return coins
+    }
+    
+    fatalError()
   }
   
   func tradingInfo(for currency: String) -> TradingInfo {

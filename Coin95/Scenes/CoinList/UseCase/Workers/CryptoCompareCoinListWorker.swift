@@ -10,7 +10,7 @@ import Foundation
 import CryptoCompareAPI
 import Promises
 
-struct CryptoCompareCoinListWorker: CoinListWorker {
+struct CryptoCompareCoinListWorker {
   private let api: CryptoCompareAPI
   private let tradingInfoWorker: CryptoCompareTradingInfoWorker
   
@@ -19,15 +19,19 @@ struct CryptoCompareCoinListWorker: CoinListWorker {
     tradingInfoWorker = CryptoCompareTradingInfoWorker(api: api)
   }
   
-  func fetchCoins(_ request: CoinListRequest) -> Promise<Coin.FetchResult> {
+  func fetchCoins(_ request: CoinListRequest) -> Promise<Void> {
     return api.send(GetCoinListRequest()).then { coinList in
       self.tradingInfoWorker.fetchTradingInfo(for: coinList, with: request).then {
-        self.save(coinList, tradingInfo: $0)
+        self.save(coinList, tradingInfo: $0, request)
       }
     }
   }
   
-  private func save(_ coinList: CoinListResponse, tradingInfo: GetSymbolsFullDataRequest.Response.CoinData) -> Promise<Coin.FetchResult> {
+  private func save(
+    _ coinList: CoinListResponse,
+    tradingInfo: GetSymbolsFullDataRequest.Response.CoinData,
+    _ request: CoinListRequest
+    ) -> Promise<Void> {
     return Promise { fulfill, _ in
       try Coin.write { transaction in
         coinList.forEach {
@@ -35,9 +39,7 @@ struct CryptoCompareCoinListWorker: CoinListWorker {
         }
       }
       
-      DispatchQueue.main.async {
-        fulfill(Coin.fetchAll())
-      }
+      fulfill(())
     }
   }
 }

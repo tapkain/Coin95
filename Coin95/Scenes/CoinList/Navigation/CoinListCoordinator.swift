@@ -15,7 +15,7 @@ class CoinListCoordinator: Coordinator {
   func start() {
     let coinListController = UIStoryboard(name: "CoinList", bundle: .main).instantiateInitialViewController() as! CoinListViewController
     
-    let presenter = CoinListPresenter(view: coinListController)
+    let presenter = CoinListPresenter()
     let useCase = CoinListInteractor(presenter: presenter)
     coinListController.useCase = useCase
     

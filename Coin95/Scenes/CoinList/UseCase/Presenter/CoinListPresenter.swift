@@ -12,16 +12,11 @@ import Charts
 import RealmSwift
 
 struct CoinListPresenter  {
-  private let view: CoinListView
-  
-  init(view: CoinListView) {
-    self.view = view
-  }
 }
 
 
 extension CoinListPresenter: CoinListPresentable {
-  func present(coins: Coin.FetchResult, _ request: CoinListRequest) {
+  func present(coins: Coin.FetchResult, _ request: CoinListRequest) -> CoinListViewModel {
     
     let viewModel = CoinListViewModel(
       coins: coins,
@@ -30,16 +25,16 @@ extension CoinListPresenter: CoinListPresentable {
           coinName: $0.name,
           imageUrl: $0.imageUrl,
           symbol: $0.symbol,
-          price: Formatter.currency.string(from: $0.tradingInfo(for: request.toSymbol).price)!,
+          price: Formatter.currency.string(from: $0.tradingInfo(for: request.currency).price)!,
           priceChartData: ChartData(),
           priceChange: CoinViewModel.PriceChange(
-            delta: Formatter.priceChange($0.tradingInfo(for: request.toSymbol).pricePercentChange),
-            color: self.color(for: $0.tradingInfo(for: request.toSymbol).pricePercentChange)
+            delta: Formatter.priceChange($0.tradingInfo(for: request.currency).pricePercentChange),
+            color: self.color(for: $0.tradingInfo(for: request.currency).pricePercentChange)
           )
         )
     })
     
-    self.view.displayFetchedCoins(with: viewModel)
+    return viewModel
   }
   
   func present(error: AppModels.AppError) {
@@ -47,7 +42,7 @@ extension CoinListPresenter: CoinListPresentable {
   }
   
   func presentHistory() {
-    view.refreshView()
+    //view.refreshView()
   }
   
 //  private func priceChartData(for points: List<Point>) -> ChartData {

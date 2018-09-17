@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Charts
 import Kingfisher
+import SkeletonView
 
 class CoinListCell: UITableViewCell {
   //static let identifier = String(describing: self)
@@ -36,14 +37,8 @@ extension CoinListCell {
       coinImage.kf.setImage(with: imageUrl)
     }
     
-    priceChart.drawBordersEnabled = false
-    priceChart.drawGridBackgroundEnabled = false
-    priceChart.legend.enabled = false
-    priceChart.leftAxis.enabled = false
-    priceChart.xAxis.enabled = false
-    priceChart.isUserInteractionEnabled = false
-    priceChart.chartDescription = nil
-    
-    priceChart.data = viewModel.priceChartData
+    price.isHidden = false
+    priceChange.isHidden = false
+    name.isHidden = false
   }
 }

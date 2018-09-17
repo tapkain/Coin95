@@ -31,7 +31,7 @@ struct CryptoCompareTradingInfoWorker {
     
     if totalFsymLength < CryptoCompareTradingInfoWorker.maxSymbolsPriceFsymLength {
       let fsyms = coinList.reduce("", { "\($0),\($1.key)" })
-      return [GetSymbolsFullDataRequest(fsyms: fsyms, tsyms: request.toSymbol, e: exchange)]
+      return [GetSymbolsFullDataRequest(fsyms: fsyms, tsyms: request.currency, e: exchange)]
     } else {
       var currentFsym = ""
       
@@ -44,7 +44,7 @@ struct CryptoCompareTradingInfoWorker {
           currentFsym = fsym
         }
       }).map {
-        GetSymbolsFullDataRequest(fsyms: $0, tsyms: request.toSymbol, e: exchange)
+        GetSymbolsFullDataRequest(fsyms: $0, tsyms: request.currency, e: exchange)
       }
     }
   }
@@ -62,8 +62,6 @@ struct CryptoCompareTradingInfoWorker {
         return $0.reduce(into: TradingInfo(), {
           $0.merge($1.raw, uniquingKeysWith: { (current, _) in current })
         })
-      }.catch {
-        print($0.localizedDescription)
       }
     }
   }

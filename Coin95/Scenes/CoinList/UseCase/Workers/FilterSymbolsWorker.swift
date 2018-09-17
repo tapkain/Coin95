@@ -32,7 +32,7 @@ struct FilterSymbolsWorker {
       coinList.filter {
         guard let exchange = exchanges[request.exchange] else { return false }
         guard let coin = exchange[$0.key] else { return false }
-        return coin.contains(request.toSymbol)
+        return coin.contains(request.currency)
       }
     )
   }

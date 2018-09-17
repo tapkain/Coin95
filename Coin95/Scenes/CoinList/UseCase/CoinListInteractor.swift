@@ -20,12 +20,14 @@ struct CoinListInteractor {
 
 
 extension CoinListInteractor: CoinListUseCase {
-  func fetchCoins(_ request: CoinListRequest) -> Promise<Void> {
+  func fetchCoins(_ request: CoinListRequest) -> Promise<CoinListViewModel> {
     return coinListWorker.fetchCoins(request).then { coins in
-      DispatchQueue.main.async {
-        self.presenter.present(coins: coins, request)
+      return Promise { fulfill, _ in
+        DispatchQueue.main.async {
+          let viewModel = self.presenter.present(coins: coins, request)
+          return fulfill(viewModel)
+        }
       }
-      return Promise(())
     }.catch {
       self.handle(error: $0)
     }

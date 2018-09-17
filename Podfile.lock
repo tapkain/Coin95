@@ -15,6 +15,23 @@ PODS:
   - RealmSwift (3.9.0):
     - Realm (= 3.9.0)
   - SkeletonView (1.4)
+  - SwifterSwift (4.4.0):
+    - SwifterSwift/AppKit (= 4.4.0)
+    - SwifterSwift/CoreGraphics (= 4.4.0)
+    - SwifterSwift/CoreLocation (= 4.4.0)
+    - SwifterSwift/Foundation (= 4.4.0)
+    - SwifterSwift/MapKit (= 4.4.0)
+    - SwifterSwift/SpriteKit (= 4.4.0)
+    - SwifterSwift/SwiftStdlib (= 4.4.0)
+    - SwifterSwift/UIKit (= 4.4.0)
+  - SwifterSwift/AppKit (4.4.0)
+  - SwifterSwift/CoreGraphics (4.4.0)
+  - SwifterSwift/CoreLocation (4.4.0)
+  - SwifterSwift/Foundation (4.4.0)
+  - SwifterSwift/MapKit (4.4.0)
+  - SwifterSwift/SpriteKit (4.4.0)
+  - SwifterSwift/SwiftStdlib (4.4.0)
+  - SwifterSwift/UIKit (4.4.0)
 
 DEPENDENCIES:
   - Charts (= 3.1.1)
@@ -25,6 +42,7 @@ DEPENDENCIES:
   - Reachability
   - RealmSwift
   - SkeletonView
+  - SwifterSwift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -38,6 +56,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SkeletonView
+    - SwifterSwift
 
 SPEC CHECKSUMS:
   Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
@@ -50,7 +69,8 @@ SPEC CHECKSUMS:
   Realm: 3d36f208bf3aff8335dc3298742140182bde4edb
   RealmSwift: aa4d11917bfcfaa3ed51f219102a487ecd895447
   SkeletonView: 50f7a9b04e3a62bd0ae964859c19317fabaea367
+  SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
 
-PODFILE CHECKSUM: d4d1c4d3df49c140ebbc386dcc55cb0ba14028bb
+PODFILE CHECKSUM: a49b78aff73ea5059b9f8a8786f463bd58acc1c0
 
 COCOAPODS: 1.5.3
