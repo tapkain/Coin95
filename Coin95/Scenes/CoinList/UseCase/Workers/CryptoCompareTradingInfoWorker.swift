@@ -15,47 +15,56 @@ struct CryptoCompareTradingInfoWorker {
   
   private static let maxSymbolsPriceFsymLength = 300
   let api: CryptoCompareAPI
+  let filterSymbolsWorker: FilterSymbolsWorker
   
-  private func buildSymbolsFullDataRequest(
+  init(api: CryptoCompareAPI) {
+    self.api = api
+    self.filterSymbolsWorker = FilterSymbolsWorker(api: api)
+  }
+  
+  private func makeSymbolsFullDataRequest(
     for coinList: GetCoinListRequest.Response,
     with request: CoinListRequest) -> [GetSymbolsFullDataRequest] {
     
-    var currentFsym = ""
+    let totalFsymLength = coinList.reduce(0, { $0 + $1.key.count }) + coinList.count
+    let exchange = Exchange(rawValue: request.exchange)!
     
-    return coinList.reduce(into: [String](), {
-      let fsym = "\($1.key),\(currentFsym)"
-      if fsym.count >= CryptoCompareTradingInfoWorker.maxSymbolsPriceFsymLength {
-        $0.append(currentFsym)
-        currentFsym = $1.key
-      } else {
-        currentFsym = fsym
+    if totalFsymLength < CryptoCompareTradingInfoWorker.maxSymbolsPriceFsymLength {
+      let fsyms = coinList.reduce("", { "\($0),\($1.key)" })
+      return [GetSymbolsFullDataRequest(fsyms: fsyms, tsyms: request.toSymbol, e: exchange)]
+    } else {
+      var currentFsym = ""
+      
+      return coinList.reduce(into: [String](), {
+        let fsym = "\($1.key),\(currentFsym)"
+        if fsym.count >= CryptoCompareTradingInfoWorker.maxSymbolsPriceFsymLength {
+          $0.append(currentFsym)
+          currentFsym = $1.key
+        } else {
+          currentFsym = fsym
+        }
+      }).map {
+        GetSymbolsFullDataRequest(fsyms: $0, tsyms: request.toSymbol, e: exchange)
       }
-    }).map {
-      let exchange = Exchange(rawValue: request.exchange)!
-      return GetSymbolsFullDataRequest(fsyms: $0, tsyms: request.toSymbol, e: exchange)
-    }
-  }
-  
-  private func fetchTradingInfo(with requests: [GetSymbolsFullDataRequest]) -> Promise<TradingInfo> {
-      return all(requests.map(api.send)).then {
-      return $0.reduce(into: TradingInfo(), {
-        $0.merge($1.raw, uniquingKeysWith: { (current, _) in current })
-      })
     }
   }
   
   // TODO: Check why API is not fetching price data for all coins
+  //
   func fetchTradingInfo(
     for coinList: GetCoinListRequest.Response,
-    with request: CoinListRequest) ->
-    Promise<TradingInfo> {
-      let requests = buildSymbolsFullDataRequest(for: coinList, with: request)
-      return fetchTradingInfo(with: requests).recover { error -> TradingInfo in
-        guard let serverError = error as? CryptoCompareError, let _  = serverError.serverErrorMessage else {
-          throw error
-        }
-        
-        return TradingInfo()
+    with request: CoinListRequest
+  ) -> Promise<TradingInfo> {
+    return filterSymbolsWorker.filterSupportedSymbols(for: coinList, request).then {
+      let requests = self.makeSymbolsFullDataRequest(for: $0, with: request)
+      
+      return all(requests.map(self.api.send)).then {
+        return $0.reduce(into: TradingInfo(), {
+          $0.merge($1.raw, uniquingKeysWith: { (current, _) in current })
+        })
+      }.catch {
+        print($0.localizedDescription)
       }
+    }
   }
 }

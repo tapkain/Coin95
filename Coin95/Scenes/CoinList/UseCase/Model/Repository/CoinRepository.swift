@@ -10,7 +10,18 @@ import Foundation
 import RealmSwift
 import CryptoCompareAPI
 
-extension Coin: Repository {}
+extension Coin: Repository {
+  static func fetchAll() -> FetchResult {
+    let realm = try! Realm()
+    let info = realm.objects(TradingInfo.self).filter("totalVolume != 0").sorted(byKeyPath: "marketCap")
+    let s = realm.objects(Coin.self).filter("tradingInfo.@count > 0").filter("symbol in %@", info.value(forKeyPath: "coin.symbol")!)
+    return s
+  }
+  
+  func tradingInfo(for currency: String) -> TradingInfo {
+    return tradingInfo.first(where: { $0.currency == currency })!
+  }
+}
 
 
 extension WriteTransaction {
@@ -29,9 +40,7 @@ extension WriteTransaction {
     
     tradingInfo.forEach {
       let newTradingInfo = create(tradingInfo: $0.value)
-      if !coin.tradingInfo.contains(newTradingInfo) {
-        coin.tradingInfo.append(newTradingInfo)
-      }
+      newTradingInfo.coin = coin
     }
   }
   

@@ -21,7 +21,8 @@ struct CoinListPresenter  {
 
 
 extension CoinListPresenter: CoinListPresentable {
-  func present(coins: Coin.FetchResult) {
+  func present(coins: Coin.FetchResult, _ request: CoinListRequest) {
+    
     let viewModel = CoinListViewModel(
       coins: coins,
       setup: {
@@ -29,11 +30,11 @@ extension CoinListPresenter: CoinListPresentable {
           coinName: $0.name,
           imageUrl: $0.imageUrl,
           symbol: $0.symbol,
-          price: "0.0",
+          price: Formatter.currency.string(from: $0.tradingInfo(for: request.toSymbol).price)!,
           priceChartData: ChartData(),
           priceChange: CoinViewModel.PriceChange(
-            delta: "0",
-            color: .white
+            delta: Formatter.priceChange($0.tradingInfo(for: request.toSymbol).pricePercentChange),
+            color: self.color(for: $0.tradingInfo(for: request.toSymbol).pricePercentChange)
           )
         )
     })

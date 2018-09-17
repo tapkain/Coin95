@@ -18,10 +18,8 @@ final class TradingInfo: Object {
   @objc dynamic var marketCap = 0.0
   @objc dynamic var price = 0.0
   @objc dynamic var exchangeString = ""
-  @objc dynamic var symbol = ""
   @objc dynamic var id = ""
-
-  let coins = LinkingObjects(fromType: Coin.self, property: "tradingInfo")
+  @objc dynamic var coin: Coin?
   
   override static func primaryKey() -> String? {
     return "id"

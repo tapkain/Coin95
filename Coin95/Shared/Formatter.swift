@@ -14,6 +14,23 @@ struct Formatter {
     formatter.numberStyle = .currency
     return formatter
   }
+  
+  static func priceChange(_ delta: Double) -> String {
+    var sign = ""
+    
+    switch delta {
+    case 1...:
+      sign = "+"
+      
+    case ..<0:
+      sign = "-"
+      
+    default:
+      sign = ""
+    }
+    
+    return "\(sign)\(delta)%"
+  }
 }
 
 

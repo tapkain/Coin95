@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import SkeletonView
 
 class CoinListViewController: UITableViewController, ViewController {
   typealias ViewModel = CoinListViewModel
@@ -23,13 +24,19 @@ class CoinListViewController: UITableViewController, ViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    view.showAnimatedGradientSkeleton()
     title = "All Coins"
+    
     let request = CoinListRequest(
       fromSymbol: "BTC",
       toSymbol: "USD",
-      exchange: "Kraken")
+      exchange: "CCCAGG"
+    )
     
-    _ = useCase.fetchCoins(request)
+    _ = useCase.fetchCoins(request).then {
+      self.view.hideSkeleton()
+    }
   }
 }
 
@@ -64,13 +71,27 @@ extension CoinListViewController {
       return
     }
     
-    let coin = viewModel.coins[indexPath.row]
-    let cellViewModel = viewModel.setup(coin)
+    guard let result = viewModel.coins else {
+      return
+    }
     
+    let coin = result[indexPath.row]
+    let cellViewModel = viewModel.setup(coin)
     cell.bind(to: cellViewModel)
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 90
+  }
+}
+
+
+extension CoinListViewController: SkeletonTableViewDataSource {
+  func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+    return CoinListCell.identifier
+  }
+  
+  func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 30
   }
 }

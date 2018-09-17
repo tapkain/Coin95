@@ -15,7 +15,7 @@ final class Coin: Object {
   @objc dynamic var symbol = ""
   @objc dynamic var imageUrlString: String?
   
-  let tradingInfo = List<TradingInfo>()
+  let tradingInfo = LinkingObjects(fromType: TradingInfo.self, property: "coin")
   let historicalInfo = List<CoinHistoryEntry>()
   
   override static func primaryKey() -> String? {

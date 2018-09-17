@@ -23,7 +23,7 @@ extension CoinListInteractor: CoinListUseCase {
   func fetchCoins(_ request: CoinListRequest) -> Promise<Void> {
     return coinListWorker.fetchCoins(request).then { coins in
       DispatchQueue.main.async {
-        self.presenter.present(coins: coins)
+        self.presenter.present(coins: coins, request)
       }
       return Promise(())
     }.catch {

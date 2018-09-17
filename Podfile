@@ -4,9 +4,11 @@ target 'Coin95' do
   use_frameworks!
 
   pod 'PromisesSwift'
-  pod 'Charts'
+  pod 'Charts',  '3.1.1'
   pod 'RealmSwift'
   pod 'Reachability'
   pod 'Kingfisher'
   pod 'CryptoCompareAPI'
+  pod 'SkeletonView'
+  pod 'Hero'
 end

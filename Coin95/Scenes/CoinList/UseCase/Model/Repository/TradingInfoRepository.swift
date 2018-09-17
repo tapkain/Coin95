@@ -30,7 +30,6 @@ extension WriteTransaction {
     managedTradingInfo.marketCap = tradingInfo.marketCap?.doubleValue ?? 0.0
     managedTradingInfo.price = tradingInfo.price.doubleValue!
     managedTradingInfo.exchangeString = tradingInfo.market
-    managedTradingInfo.symbol = tradingInfo.fromSymbol
     
     return managedTradingInfo
   }
