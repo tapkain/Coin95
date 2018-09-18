@@ -21,6 +21,8 @@ struct CoinListInteractor {
 
 extension CoinListInteractor: CoinListUseCase {
   func fetchCoins(_ request: CoinListRequest) -> Promise<CoinListViewModel> {
+    print("Interactor.fetchCoins(). Request:\n \(request.description)\n\n")
+    
     return coinListWorker.fetchCoins(request).then { coins in
       return Promise { fulfill, _ in
         DispatchQueue.main.async {

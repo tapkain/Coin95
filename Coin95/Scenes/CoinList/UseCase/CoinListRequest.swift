@@ -47,3 +47,35 @@ struct CoinListRequest {
     self.exchange = exchange
   }
 }
+
+
+// MARK: - CustomStringConvertible
+extension CoinListRequest.SearchBy: CustomStringConvertible {
+  var description: String {
+    switch self {
+    case .name(let value):
+      return "name '\(value)'"
+    default:
+      return "none"
+    }
+  }
+}
+
+
+extension CoinListRequest.SortBy: CustomStringConvertible {
+  var description: String {
+    return self.rawValue
+  }
+}
+
+
+extension CoinListRequest: CustomStringConvertible {
+  var description: String {
+    return """
+      exchange: \(exchange)
+      currency: \(currency)
+      searchBy: \(searchBy.description)
+      sortBy: \(sortBy.description)
+    """
+  }
+}

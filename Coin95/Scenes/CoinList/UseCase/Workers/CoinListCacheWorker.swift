@@ -16,16 +16,26 @@ struct CoinListCacheWorker: CoinListWorker {
   
   func fetchCoins(_ request: CoinListRequest) -> Promise<Coin.FetchResult> {
     if shouldFetchFromAPI() {
+      print("CoinListCacheWorker - Fetching from API")
       return apiWorker.fetchCoins(request).then {
         self.fetchLocal(request)
       }
     }
     
+    print("CoinListCacheWorker - Fething from local DB")
     return fetchLocal(request)
   }
   
-  private func shouldFetchFromAPI() -> Bool {
-    return Reachability.forInternetConnection().isReachable()
+  func shouldFetchFromAPI() -> Bool {
+    // if is internet available
+    // if should refresh cache {
+    //    if cache refresh timeout is exceeded
+    //    if there is no data in cache
+    //    return true
+    //} else return false
+    //add error handling
+    //return Reachability.forInternetConnection().isReachable()
+    return false
   }
   
   private func fetchLocal(_ request: CoinListRequest) -> Promise<Coin.FetchResult> {

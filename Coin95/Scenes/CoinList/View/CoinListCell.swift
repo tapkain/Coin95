@@ -37,8 +37,12 @@ extension CoinListCell {
       coinImage.kf.setImage(with: imageUrl)
     }
     
-    price.isHidden = false
-    priceChange.isHidden = false
-    name.isHidden = false
+    prepareForSkeleton(false)
+  }
+  
+  func prepareForSkeleton(_ isHidden: Bool = true) {
+    price.isHidden = isHidden
+    priceChange.isHidden = isHidden
+    name.isHidden = isHidden
   }
 }

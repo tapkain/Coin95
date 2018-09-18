@@ -15,7 +15,7 @@ struct CryptoCompareCoinListWorker {
   private let tradingInfoWorker: CryptoCompareTradingInfoWorker
   
   init() {
-    api = CryptoCompareAPI()
+    api = CryptoCompareAPI(applicationName: nil, logRequests: false)
     tradingInfoWorker = CryptoCompareTradingInfoWorker(api: api)
   }
   

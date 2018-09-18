@@ -14,23 +14,62 @@ import SwifterSwift
 class CoinListViewController: UITableViewController, ViewController {
   typealias ViewModel = CoinListViewModel
   
-  enum ViewState {
-    case loading
-    case displayingCoins
-    case filtering
+  enum ViewState: CustomStringConvertible {
+    case fetching
+    case fetched(ViewModel)
     case emptyData
+    
+    var isEmptyData: Bool {
+      switch self {
+      case .emptyData:
+        return true
+      default:
+        return false
+      }
+    }
+    
+    var isFetching: Bool {
+      switch self {
+      case .fetching:
+        return true
+      default:
+        return false
+      }
+    }
+    
+    var description: String {
+      switch self {
+      case .fetching:
+        return "Fetching"
+      case .fetched(_):
+        return "Fetched"
+      case .emptyData:
+        return "Empty Data"
+      }
+    }
   }
   
   var useCase: CoinListUseCase!
   private var useCaseRequest = CoinListRequest.initial
   private var viewModel = ViewModel()
-  private var state = ViewState.emptyData
+  private var searchTimer: Timer?
+  
+  private var state = ViewState.emptyData {
+    didSet {
+      print("State changed from \(oldValue.description) to \(state.description)")
+      DispatchQueue.main.async {
+        self.render()
+      }
+    }
+  }
   
   private var searchController: UISearchController {
     let controller = UISearchController(searchResultsController: nil)
     controller.searchResultsUpdater = self
     controller.obscuresBackgroundDuringPresentation = false
     controller.searchBar.placeholder = "Search by name or symbol"
+    controller.searchBar.delegate = self
+    
     navigationItem.searchController = controller
     definesPresentationContext = true
     return controller
@@ -50,14 +89,23 @@ class CoinListViewController: UITableViewController, ViewController {
   }
   
   func fetchCoins() {
-    state = .loading
-    view.showAnimatedGradientSkeleton()
+    state = .fetching
     useCase.fetchCoins(useCaseRequest).then { viewModel in
-      DispatchQueue.main.async {
-        self.viewModel = viewModel
-        self.tableView.reloadData()
-        self.view.hideSkeleton(reloadDataAfter: false)
-      }
+      self.state = .fetched(viewModel)
+    }
+  }
+  
+  func render() {
+    switch state {
+    case .fetching:
+      UIApplication.shared.isNetworkActivityIndicatorVisible = true
+      view.showAnimatedGradientSkeleton()
+      
+    case .fetched(let viewModel):
+      displayFetchedCoins(with: viewModel)
+
+    case .emptyData:
+      print("Empty Data")
     }
   }
 }
@@ -66,21 +114,25 @@ class CoinListViewController: UITableViewController, ViewController {
 // MARK: - CoinListView
 extension CoinListViewController {
   func displayFetchedCoins(with viewModel: ViewModel) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = false
     self.viewModel = viewModel
+    
+    DispatchQueue.main.async {
+      self.view.hideSkeleton(reloadDataAfter: false)
+    }
+    
     tableView.reloadData() {
       if viewModel.count != 0 {
         let path = IndexPath(row: 0, section: 0)
         self.tableView.scrollToRow(at: path, at: .top, animated: true)
+      } else {
+        self.state = .emptyData
       }
     }
   }
   
   func display(error: AppModels.AppError) {
     
-  }
-  
-  func refreshView() {
-    tableView.reloadData()
   }
 }
 
@@ -100,13 +152,15 @@ extension CoinListViewController {
       return
     }
     
-    guard let result = viewModel.coins else {
-      return
+    switch state {
+    case .emptyData, .fetching:
+      cell.prepareForSkeleton()
+      
+    default:
+      let coin = viewModel.coins[indexPath.row]
+      let cellViewModel = viewModel.setup(coin)
+      cell.bind(to: cellViewModel)
     }
-    
-    let coin = result[indexPath.row]
-    let cellViewModel = viewModel.setup(coin)
-    cell.bind(to: cellViewModel)
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -122,16 +176,27 @@ extension CoinListViewController: SkeletonTableViewDataSource {
   }
   
   func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return viewModel.count != 0 ? viewModel.count : 30
+    return state.isFetching ? 30 : viewModel.count
   }
 }
 
 
 // MARK: - UISearchControllerDelegate
-extension CoinListViewController: UISearchResultsUpdating {
+extension CoinListViewController: UISearchResultsUpdating, UISearchBarDelegate {
   func updateSearchResults(for searchController: UISearchController) {
-    let text = searchController.searchBar.text ?? ""
-    useCaseRequest.searchBy = .name(text)
+    searchTimer?.invalidate()
+    guard let text = searchController.searchBar.text, !text.isEmpty && !state.isFetching else {
+      return
+    }
+    
+    searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
+      self.useCaseRequest.searchBy = .name(text)
+      self.fetchCoins()
+    }
+  }
+  
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    useCaseRequest.searchBy = .none
     fetchCoins()
   }
 }
