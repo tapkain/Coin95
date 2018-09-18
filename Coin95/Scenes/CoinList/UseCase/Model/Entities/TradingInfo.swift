@@ -14,7 +14,9 @@ final class TradingInfo: Object {
   @objc dynamic var currency = ""
   @objc dynamic var volume = 0.0
   @objc dynamic var totalVolume = 0.0
-  @objc dynamic var pricePercentChange = 0.0
+  @objc dynamic var priceChange1h = 0.0
+  @objc dynamic var priceChange24h = 0.0
+  @objc dynamic var priceChange7d = 0.0
   @objc dynamic var marketCap = 0.0
   @objc dynamic var price = 0.0
   @objc dynamic var exchangeString = ""

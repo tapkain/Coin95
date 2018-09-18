@@ -25,7 +25,7 @@ extension Coin: Repository {
     
     switch filter.searchBy {
     case .name(let value):
-      return coins.filter("symbol LIKE[c] %@ || name LIKE[c] %@", value, value)
+      return coins.filter("symbol CONTAINS[cd] %@ || name CONTAINS[cd] %@", value, value)
     default:
       return coins
     }

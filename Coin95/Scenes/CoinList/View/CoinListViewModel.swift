@@ -32,8 +32,9 @@ struct CoinViewModel {
   let imageUrl: URL?
   let symbol: String
   let price: String
-  let priceChartData: Charts.ChartData
-  let priceChange: PriceChange
+  let priceChange1h: PriceChange
+  let priceChange24h: PriceChange
+  let priceChange7d: PriceChange
   
   struct PriceChange {
     let delta: String

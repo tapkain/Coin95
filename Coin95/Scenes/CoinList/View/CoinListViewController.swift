@@ -63,14 +63,30 @@ class CoinListViewController: UITableViewController, ViewController {
     }
   }
   
+  private lazy var emptyDataView: UIView = {
+    let nib = UINib(nibName: "CoinListEmptyTableView", bundle: Bundle.main)
+    let view = nib.instantiate(withOwner: nil, options: nil)[0] as! UIView
+    view.isHidden = true
+    view.frame = tableView.frame
+    self.view.addSubview(view)
+    return view
+  }()
+  
+  private lazy var tableHeaderView: UIView = {
+    let nib = UINib(nibName: "CoinListTableHeaderView", bundle: Bundle.main)
+    let view = nib.instantiate(withOwner: nil, options: nil)[0] as! UIView
+    return view
+  }()
+  
   private var searchController: UISearchController {
     let controller = UISearchController(searchResultsController: nil)
     controller.searchResultsUpdater = self
     controller.obscuresBackgroundDuringPresentation = false
-    controller.searchBar.placeholder = "Search by name or symbol"
+    controller.searchBar.placeholder = "Search coin"
     controller.searchBar.delegate = self
     
     navigationItem.searchController = controller
+    navigationItem.hidesSearchBarWhenScrolling = false
     definesPresentationContext = true
     return controller
   }
@@ -81,17 +97,31 @@ class CoinListViewController: UITableViewController, ViewController {
     ]
   }
   
+  private lazy var pullToRefresh: UIRefreshControl = {
+    let control = UIRefreshControl()
+    control.addTarget(self, action: #selector(fetchCoins), for: .valueChanged)
+    return control
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     fetchCoins()
     title = "All Coins"
     navigationItem.rightBarButtonItems = rightBarButtonItems
+    tableView.refreshControl = pullToRefresh
+    //tableView.tableHeaderView = tableHeaderView
+    searchController.isActive = true
   }
   
-  func fetchCoins() {
+  @objc func fetchCoins() {
     state = .fetching
     useCase.fetchCoins(useCaseRequest).then { viewModel in
       self.state = .fetched(viewModel)
+    }.always {
+      // TODO: Move this to state handling when implementing errors
+      DispatchQueue.main.async {
+        self.pullToRefresh.endRefreshing()
+      }
     }
   }
   
@@ -105,7 +135,7 @@ class CoinListViewController: UITableViewController, ViewController {
       displayFetchedCoins(with: viewModel)
 
     case .emptyData:
-      print("Empty Data")
+      emptyDataView.isHidden = false
     }
   }
 }
@@ -116,13 +146,11 @@ extension CoinListViewController {
   func displayFetchedCoins(with viewModel: ViewModel) {
     UIApplication.shared.isNetworkActivityIndicatorVisible = false
     self.viewModel = viewModel
-    
-    DispatchQueue.main.async {
-      self.view.hideSkeleton(reloadDataAfter: false)
-    }
+    self.view.hideSkeleton(reloadDataAfter: false)
     
     tableView.reloadData() {
       if viewModel.count != 0 {
+        self.emptyDataView.isHidden = true
         let path = IndexPath(row: 0, section: 0)
         self.tableView.scrollToRow(at: path, at: .top, animated: true)
       } else {
@@ -165,6 +193,10 @@ extension CoinListViewController {
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 90
+  }
+  
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    return tableHeaderView
   }
 }
 
