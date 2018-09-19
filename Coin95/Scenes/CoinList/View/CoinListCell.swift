@@ -41,6 +41,7 @@ class CoinListCell: FoldingCell {
   
   // MARK: - Open Cell
   @IBOutlet weak var historySegmentControl: Segmentio!
+  @IBOutlet weak var containerChartView: LineChartView!
   
   @objc open override func animationDuration(_ itemIndex: NSInteger, type: AnimationType) -> TimeInterval {
     let durations = [0.33, 0.26, 0.26]
@@ -52,6 +53,7 @@ class CoinListCell: FoldingCell {
 extension CoinListCell {
   override func prepareForReuse() {
     leftTopView.roundCorners([.bottomLeft, .topLeft], radius: 10)
+    historySegmentControl.valueDidChange = nil
   }
   
   func willDisplay(with viewModel: CoinViewModel) {
@@ -81,11 +83,8 @@ extension CoinListCell {
       options: Segmentio.defaultOptions
     )
     
-    historySegmentControl.valueDidChange = { _, _ in
-      //fetch from use case data and display
-    }
-    
     historySegmentControl.selectedSegmentioIndex = 1
+    setupContainerChartView(viewModel)
   }
   
   private func setupCloseCell(with viewModel: CoinViewModel) {
@@ -123,5 +122,29 @@ extension CoinListCell {
     history24hView.drawBordersEnabled = false
     history24hView.chartDescription?.enabled = false
     history24hView.isUserInteractionEnabled = false
+  }
+  
+  private func setupContainerChartView(_ viewModel: CoinViewModel) {
+    let dataEntries = viewModel.history24h.map {
+      return ChartDataEntry(x: $0.x, y: $0.y)
+    }
+    
+    let dataSet = LineChartDataSet(values: dataEntries, label: nil)
+    dataSet.lineWidth = 1
+    dataSet.drawValuesEnabled = false
+    dataSet.circleRadius = 1
+    dataSet.drawCircleHoleEnabled = false
+    dataSet.drawFilledEnabled = true
+    
+    let data = LineChartData(dataSets: [dataSet])
+    containerChartView.data = data
+//    history24hView.legend.enabled = false
+//    history24hView.leftAxis.enabled = false
+//    history24hView.rightAxis.enabled = false
+//    history24hView.xAxis.enabled = false
+//    history24hView.drawGridBackgroundEnabled = false
+//    history24hView.drawMarkers = false
+//    history24hView.drawBordersEnabled = false
+//    history24hView.chartDescription?.enabled = false
   }
 }

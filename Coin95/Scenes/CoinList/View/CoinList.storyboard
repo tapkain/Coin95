@@ -65,12 +65,20 @@
                                                                 <constraint firstAttribute="height" constant="40" id="9PO-ox-MMn"/>
                                                             </constraints>
                                                         </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbe-JA-SdB" customClass="LineChartView" customModule="Charts">
+                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="188"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="cbe-JA-SdB" firstAttribute="top" secondItem="OBC-B8-Ar1" secondAttribute="top" id="Cm6-l6-Qjm"/>
                                                         <constraint firstAttribute="trailing" secondItem="wyR-nW-ESA" secondAttribute="trailing" id="JPO-Xd-nWJ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="cbe-JA-SdB" secondAttribute="trailing" id="NGD-Gx-lRk"/>
                                                         <constraint firstAttribute="bottom" secondItem="wyR-nW-ESA" secondAttribute="bottom" id="R79-kf-XWp"/>
                                                         <constraint firstItem="wyR-nW-ESA" firstAttribute="leading" secondItem="OBC-B8-Ar1" secondAttribute="leading" id="byq-12-keH"/>
+                                                        <constraint firstItem="cbe-JA-SdB" firstAttribute="leading" secondItem="OBC-B8-Ar1" secondAttribute="leading" id="e25-Vu-MoY"/>
+                                                        <constraint firstItem="wyR-nW-ESA" firstAttribute="top" secondItem="cbe-JA-SdB" secondAttribute="bottom" id="s6m-1h-GEJ"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -192,6 +200,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="coinImage" destination="Giw-An-gRx" id="eHh-9l-Imb"/>
+                                    <outlet property="containerChartView" destination="cbe-JA-SdB" id="mzU-gC-87Y"/>
                                     <outlet property="containerView" destination="lsL-lU-7wt" id="8Dl-Po-oRm"/>
                                     <outlet property="containerViewTop" destination="mLB-RS-IdR" id="MYM-R6-lr8"/>
                                     <outlet property="foregroundView" destination="4Uc-5w-TPn" id="pZd-BC-lpr"/>

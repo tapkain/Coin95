@@ -56,8 +56,13 @@ extension CoinListViewController {
     
     viewModel.toggleCellState(for: indexPath.row)
     cell.didSelected(with: viewModel[indexPath.row])
+    cell.historySegmentControl.valueDidChange = { [unowned self] _, index in
+      let coin = self.viewModel.coins[indexPath.row]
+      self.useCase.fetchHistory(for: coin, self.useCaseRequest)
+    }
     
     UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
+      tableView.scrollToRow(at: indexPath, at: .top, animated: false)
       tableView.beginUpdates()
       tableView.endUpdates()
     })
