@@ -29,6 +29,7 @@ extension CoinListPresenter: CoinListPresentable {
           history24h: $0.historicalInfo.map {
             return (x: Double($0.time), y: $0.close)
           },
+          state: .open,
           price: Formatter.currency.string(from: tradingInfo.price)!
         )
     })

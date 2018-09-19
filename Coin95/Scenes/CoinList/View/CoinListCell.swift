@@ -15,13 +15,6 @@ import Charts
 import Segmentio
 
 class CoinListCell: FoldingCell {
-  enum ViewState {
-    case closed
-    case open
-  }
-  
-  var state = ViewState.closed
-  
   struct CellHeight {
     static let close: CGFloat = 85
     static let open: CGFloat = 470
@@ -57,7 +50,31 @@ class CoinListCell: FoldingCell {
 
 
 extension CoinListCell {
-  func setupOpenCell(with viewModel: CoinViewModel) {
+  override func prepareForReuse() {
+    leftTopView.roundCorners([.bottomLeft, .topLeft], radius: 10)
+  }
+  
+  func willDisplay(with viewModel: CoinViewModel) {
+    setup(with: viewModel, animated: false)
+  }
+  
+  func didSelected(with viewModel: CoinViewModel) {
+    setup(with: viewModel, animated: true)
+  }
+  
+  private func setup(with viewModel: CoinViewModel, animated: Bool) {
+    switch viewModel.state {
+    case .open:
+      unfold(true, animated: animated, completion: nil)
+      setupOpenCell(with: viewModel)
+      
+    case .closed:
+      unfold(false, animated: animated, completion: nil)
+      setupCloseCell(with: viewModel)
+    }
+  }
+  
+  private func setupOpenCell(with viewModel: CoinViewModel) {
     historySegmentControl.setup(
       content: CoinListCell.segmentItems,
       style: .onlyLabel,
@@ -71,7 +88,7 @@ extension CoinListCell {
     historySegmentControl.selectedSegmentioIndex = 1
   }
   
-  func setupCloseCell(with viewModel: CoinViewModel) {
+  private func setupCloseCell(with viewModel: CoinViewModel) {
     price.text = viewModel.price
     name.text = viewModel.coinName
     symbol.text = viewModel.symbol
@@ -80,7 +97,6 @@ extension CoinListCell {
       coinImage.kf.setImage(with: imageUrl)
     }
     
-    leftTopView.roundCorners([.bottomLeft, .topLeft], radius: 10)
     setupHistoryView(viewModel)
   }
   

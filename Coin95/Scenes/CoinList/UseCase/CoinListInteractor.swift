@@ -36,7 +36,7 @@ extension CoinListInteractor: CoinListUseCase {
   }
   
   func fetchHistory(for coin: Coin, _ request: CoinListRequest) {
-    print("Fetch history for \(coin.symbol)")
+    //print("Fetch history for \(coin.symbol)")
     _ = coinListCache.fetchHistory(for: coin, request)
   }
   

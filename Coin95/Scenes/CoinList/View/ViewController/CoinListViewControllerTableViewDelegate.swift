@@ -30,32 +30,32 @@ extension CoinListViewController {
       return
       
     default:
-      let coin = viewModel.coins[indexPath.row]
-      let cellViewModel = viewModel.setup(coin)
-      cell.setupCloseCell(with: cellViewModel)
-      //cell.bind(to: cellViewModel)
+      cell.willDisplay(with: viewModel[indexPath.row])
     }
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return viewModel.cellHeights[indexPath.row]
+    return viewModel.height(for: indexPath.row)
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath) else {
+    guard case let cell as CoinListCell = tableView.cellForRow(at: indexPath) else {
+      return
+    }
+    
+    if cell.isAnimating() {
       return
     }
     
     var duration = 0.0
-    if viewModel.cellHeights[indexPath.row] == CoinListCell.CellHeight.close {
-      viewModel.cellHeights[indexPath.row] = CoinListCell.CellHeight.open
-      cell.unfold(true, animated: true, completion: nil)
+    if viewModel.cellState(for: indexPath.row) == .closed {
       duration = 0.5
     } else {
-      viewModel.cellHeights[indexPath.row] = CoinListCell.CellHeight.close
-      cell.unfold(false, animated: true, completion: nil)
       duration = 0.8
     }
+    
+    viewModel.toggleCellState(for: indexPath.row)
+    cell.didSelected(with: viewModel[indexPath.row])
     
     UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
       tableView.beginUpdates()

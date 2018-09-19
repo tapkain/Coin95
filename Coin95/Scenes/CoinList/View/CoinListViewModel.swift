@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 struct CoinListViewModel {
-  var cellHeights = [CGFloat]()
+  private var cellHeights = [CGFloat]()
   var coins: Results<Coin>!
   var setup: ((Coin) -> CoinViewModel)!
   
@@ -21,10 +21,34 @@ struct CoinListViewModel {
     return coins.count
   }
   
+  func cellState(for index: Int) -> CoinViewModel.CellState {
+    return cellHeights[index] == CoinListCell.CellHeight.open ? .open : .closed
+  }
+  
+  func height(for index: Int) -> CGFloat {
+    return cellHeights[index]
+  }
+  
+  mutating func toggleCellState(for index: Int) {
+    switch cellState(for: index) {
+    case .open:
+      cellHeights[index] = CoinListCell.CellHeight.close
+    case .closed:
+      cellHeights[index] = CoinListCell.CellHeight.open
+    }
+  }
+  
   init(coins: Results<Coin>! = nil, setup: ((Coin) -> CoinViewModel)! = nil) {
     self.coins = coins
     self.setup = setup
     cellHeights = calculateCellHeights()
+  }
+  
+  subscript(index: Int) -> CoinViewModel {
+    let coin = coins[index]
+    var viewModel = setup(coin)
+    viewModel.state = cellState(for: index)
+    return viewModel
   }
   
   private func calculateCellHeights() -> [CGFloat] {
@@ -33,10 +57,16 @@ struct CoinListViewModel {
 }
 
 struct CoinViewModel {
+  enum CellState {
+    case open
+    case closed
+  }
+  
   let coinName: String
   let symbol: String
   let imageUrl: URL?
   let history24h: [(x: Double, y: Double)]
+  var state: CellState
   let price: String
   
   struct PriceChange {
