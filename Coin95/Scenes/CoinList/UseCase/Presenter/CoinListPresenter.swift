@@ -24,11 +24,11 @@ extension CoinListPresenter: CoinListPresentable {
           coinName: $0.name,
           imageUrl: $0.imageUrl,
           symbol: $0.symbol,
-          price: Formatter.currency.string(from: $0.tradingInfo(for: request.currency).price)!,
-          priceChange: CoinViewModel.PriceChange(
-            delta: Formatter.priceChange($0.tradingInfo(for: request.currency).pricePercentChange),
-            color: self.color(for: $0.tradingInfo(for: request.currency).pricePercentChange)
-          )
+          price: Formatter.currency.string(from: $0.tradingInfo(for: request.currency).price)!
+//          priceChange: CoinViewModel.PriceChange(
+//            delta: Formatter.priceChange($0.tradingInfo(for: request.currency).pricePercentChange),
+//            color: self.color(for: $0.tradingInfo(for: request.currency).pricePercentChange)
+//          )
         )
     })
     

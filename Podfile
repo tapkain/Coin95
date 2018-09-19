@@ -9,7 +9,8 @@ target 'Coin95' do
   pod 'Reachability'
   pod 'Kingfisher'
   pod 'CryptoCompareAPI'
-  pod 'SkeletonView'
+  pod 'NVActivityIndicatorView'
   pod 'Hero'
   pod 'SwifterSwift'
+  pod 'FoldingCell'
 end

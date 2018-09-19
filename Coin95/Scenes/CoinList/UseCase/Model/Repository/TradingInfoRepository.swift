@@ -26,7 +26,7 @@ extension WriteTransaction {
     managedTradingInfo.currency = tradingInfo.toSymbol
     managedTradingInfo.volume = tradingInfo.volumeDayTo?.doubleValue ?? 0.0
     managedTradingInfo.totalVolume = tradingInfo.totalVolume24HourTo?.doubleValue ?? 0.0
-    managedTradingInfo.pricePercentChange = tradingInfo.changePctDay.doubleValue!
+    //managedTradingInfo.pricePercentChange = tradingInfo.changePctDay.doubleValue!
     managedTradingInfo.marketCap = tradingInfo.marketCap?.doubleValue ?? 0.0
     managedTradingInfo.price = tradingInfo.price.doubleValue!
     managedTradingInfo.exchangeString = tradingInfo.market

@@ -35,7 +35,7 @@ struct CoinListCacheWorker: CoinListWorker {
     //} else return false
     //add error handling
     //return Reachability.forInternetConnection().isReachable()
-    return false
+    return true
   }
   
   private func fetchLocal(_ request: CoinListRequest) -> Promise<Coin.FetchResult> {

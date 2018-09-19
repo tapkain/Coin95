@@ -20,6 +20,9 @@
 		795EF7FD211F3ADC00BFACB7 /* CoinListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795EF7FC211F3ADC00BFACB7 /* CoinListCell.swift */; };
 		795EF7FF211F431800BFACB7 /* CoinList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795EF7FE211F431800BFACB7 /* CoinList.storyboard */; };
 		7969C00D20FF15A600852919 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7969C00C20FF15A600852919 /* Assets.xcassets */; };
+		796C089D2151906B006DD1DF /* UIColor+AssetColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796C089C2151906B006DD1DF /* UIColor+AssetColors.swift */; };
+		796C089F21519527006DD1DF /* NVActivityIndicatorView+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796C089E21519527006DD1DF /* NVActivityIndicatorView+Random.swift */; };
+		796C08CD2151C25D006DD1DF /* CoinListHistoryWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796C08CC2151C25D006DD1DF /* CoinListHistoryWorker.swift */; };
 		79875BB8214BEB57000CBE14 /* FilterSymbolsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79875BB7214BEB57000CBE14 /* FilterSymbolsWorker.swift */; };
 		799E88F32134648A00454842 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799E88F22134648A00454842 /* Formatter.swift */; };
 		79ABEDBD2136C257009C8FE4 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ABEDBC2136C257009C8FE4 /* Coin.swift */; };
@@ -45,8 +48,6 @@
 		79CCA98A21486135009E3DBA /* CoinListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CCA98921486135009E3DBA /* CoinListPresenter.swift */; };
 		79CE64A52135627E00CDB432 /* TradingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CE64A42135627E00CDB432 /* TradingInfo.swift */; };
 		79D318372143DCFA00A4D0FD /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D318362143DCFA00A4D0FD /* AppModels.swift */; };
-		79F165B1215020EE003A64C1 /* CoinListTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F165B0215020EE003A64C1 /* CoinListTableHeaderView.swift */; };
-		79F165B321502100003A64C1 /* CoinListTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F165B221502100003A64C1 /* CoinListTableHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,9 @@
 		7969C00220FF15A400852919 /* Coin95.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coin95.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7969C00C20FF15A600852919 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7969C01120FF15A600852919 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		796C089C2151906B006DD1DF /* UIColor+AssetColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AssetColors.swift"; sourceTree = "<group>"; };
+		796C089E21519527006DD1DF /* NVActivityIndicatorView+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NVActivityIndicatorView+Random.swift"; sourceTree = "<group>"; };
+		796C08CC2151C25D006DD1DF /* CoinListHistoryWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListHistoryWorker.swift; sourceTree = "<group>"; };
 		79875BB7214BEB57000CBE14 /* FilterSymbolsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSymbolsWorker.swift; sourceTree = "<group>"; };
 		799E88F22134648A00454842 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		79ABEDBC2136C257009C8FE4 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
@@ -91,8 +95,6 @@
 		79CCA98921486135009E3DBA /* CoinListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinListPresenter.swift; sourceTree = "<group>"; };
 		79CE64A42135627E00CDB432 /* TradingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingInfo.swift; sourceTree = "<group>"; };
 		79D318362143DCFA00A4D0FD /* AppModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModels.swift; sourceTree = "<group>"; };
-		79F165B0215020EE003A64C1 /* CoinListTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListTableHeaderView.swift; sourceTree = "<group>"; };
-		79F165B221502100003A64C1 /* CoinListTableHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoinListTableHeaderView.xib; sourceTree = "<group>"; };
 		94CC90EDE360C18497B79772 /* Pods-Coin95.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coin95.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coin95/Pods-Coin95.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,6 +138,8 @@
 				79CCA97021484DC2009E3DBA /* Repository.swift */,
 				79B1465A213035730074A94A /* Views */,
 				79CCA97421484E9D009E3DBA /* ViewController.swift */,
+				796C089C2151906B006DD1DF /* UIColor+AssetColors.swift */,
+				796C089E21519527006DD1DF /* NVActivityIndicatorView+Random.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -183,7 +187,6 @@
 		795EF80C2127329D00BFACB7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				79F165AF215020D7003A64C1 /* TableHeaderView */,
 				795EF7E220FF237500BFACB7 /* CoinListViewController.swift */,
 				795EF7FC211F3ADC00BFACB7 /* CoinListCell.swift */,
 				795EF7FE211F431800BFACB7 /* CoinList.storyboard */,
@@ -222,6 +225,7 @@
 				79CCA985214854E7009E3DBA /* CoinListCacheWorker.swift */,
 				79CCA98721485921009E3DBA /* CryptoCompareTradingInfoWorker.swift */,
 				79875BB7214BEB57000CBE14 /* FilterSymbolsWorker.swift */,
+				796C08CC2151C25D006DD1DF /* CoinListHistoryWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -317,15 +321,6 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		79F165AF215020D7003A64C1 /* TableHeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				79F165B0215020EE003A64C1 /* CoinListTableHeaderView.swift */,
-				79F165B221502100003A64C1 /* CoinListTableHeaderView.xib */,
-			);
-			path = TableHeaderView;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -387,7 +382,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7969C00D20FF15A600852919 /* Assets.xcassets in Resources */,
-				79F165B321502100003A64C1 /* CoinListTableHeaderView.xib in Resources */,
 				795EF7FF211F431800BFACB7 /* CoinList.storyboard in Resources */,
 				795EF7F7211F39C600BFACB7 /* SettingsViewController.xib in Resources */,
 				79BA50CD21514D9600689C5E /* CoinListEmptyTableView.xib in Resources */,
@@ -424,28 +418,30 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Coin95/Pods-Coin95-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoCompareAPI/CryptoCompareAPI.framework",
+				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework",
 				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoCompareAPI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Promises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,7 +457,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				794EAF4B2141AE3900939E5B /* CryptoCompareAPI+Helper.swift in Sources */,
-				79F165B1215020EE003A64C1 /* CoinListTableHeaderView.swift in Sources */,
 				799E88F32134648A00454842 /* Formatter.swift in Sources */,
 				79D318372143DCFA00A4D0FD /* AppModels.swift in Sources */,
 				795EF7DF20FF223900BFACB7 /* AppDelegate.swift in Sources */,
@@ -470,11 +465,13 @@
 				79875BB8214BEB57000CBE14 /* FilterSymbolsWorker.swift in Sources */,
 				79CCA9342147DEE8009E3DBA /* Preferences.swift in Sources */,
 				79C5FC0D215002AC00B56EDA /* PullToRefresh.swift in Sources */,
+				796C089D2151906B006DD1DF /* UIColor+AssetColors.swift in Sources */,
 				79CCA986214854E7009E3DBA /* CoinListCacheWorker.swift in Sources */,
 				79CCA97821485000009E3DBA /* CoinListPresentable.swift in Sources */,
 				79CCA97C214850D0009E3DBA /* CoinListRequest.swift in Sources */,
 				79CCA9382147ED0A009E3DBA /* CoinHistoryEntry.swift in Sources */,
 				795EF7EB211F1BA500BFACB7 /* Coordinator.swift in Sources */,
+				796C08CD2151C25D006DD1DF /* CoinListHistoryWorker.swift in Sources */,
 				795EF7E520FF239200BFACB7 /* SettingsViewController.swift in Sources */,
 				79CCA9822148523A009E3DBA /* CoinListWorker.swift in Sources */,
 				795EF7E320FF237500BFACB7 /* CoinListViewController.swift in Sources */,
@@ -487,6 +484,7 @@
 				79CCA92E2147C2F3009E3DBA /* CoinRepository.swift in Sources */,
 				79CE64A52135627E00CDB432 /* TradingInfo.swift in Sources */,
 				795EF7FD211F3ADC00BFACB7 /* CoinListCell.swift in Sources */,
+				796C089F21519527006DD1DF /* NVActivityIndicatorView+Random.swift in Sources */,
 				79ABEDBD2136C257009C8FE4 /* Coin.swift in Sources */,
 				79CCA93A214803E9009E3DBA /* CoinHistoryEntryRepository.swift in Sources */,
 				79CCA98A21486135009E3DBA /* CoinListPresenter.swift in Sources */,

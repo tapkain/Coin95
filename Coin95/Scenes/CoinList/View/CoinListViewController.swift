@@ -8,8 +8,9 @@
 
 import UIKit
 import RealmSwift
-import SkeletonView
+import NVActivityIndicatorView
 import SwifterSwift
+import FoldingCell
 
 class CoinListViewController: UITableViewController, ViewController {
   typealias ViewModel = CoinListViewModel
@@ -63,18 +64,32 @@ class CoinListViewController: UITableViewController, ViewController {
     }
   }
   
+  private lazy var activityIndicator: NVActivityIndicatorView = {
+    let view = NVActivityIndicatorView(
+      frame: .zero,
+      type: .ballPulseSync,
+      color: .purple
+    )
+    
+    view.translatesAutoresizingMaskIntoConstraints = false
+    self.view.addSubview(view)
+    
+    NSLayoutConstraint.activate([
+        view.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+        view.centerYAnchor.constraint(equalTo: tableView.centerYAnchor, constant: -150),
+        view.widthAnchor.constraint(equalToConstant: 75),
+        view.heightAnchor.constraint(equalToConstant: 75)
+    ])
+    
+    return view
+  }()
+  
   private lazy var emptyDataView: UIView = {
     let nib = UINib(nibName: "CoinListEmptyTableView", bundle: Bundle.main)
     let view = nib.instantiate(withOwner: nil, options: nil)[0] as! UIView
     view.isHidden = true
     view.frame = tableView.frame
     self.view.addSubview(view)
-    return view
-  }()
-  
-  private lazy var tableHeaderView: UIView = {
-    let nib = UINib(nibName: "CoinListTableHeaderView", bundle: Bundle.main)
-    let view = nib.instantiate(withOwner: nil, options: nil)[0] as! UIView
     return view
   }()
   
@@ -109,7 +124,7 @@ class CoinListViewController: UITableViewController, ViewController {
     title = "All Coins"
     navigationItem.rightBarButtonItems = rightBarButtonItems
     tableView.refreshControl = pullToRefresh
-    //tableView.tableHeaderView = tableHeaderView
+    tableView.prefetchDataSource = self
     searchController.isActive = true
   }
   
@@ -129,7 +144,8 @@ class CoinListViewController: UITableViewController, ViewController {
     switch state {
     case .fetching:
       UIApplication.shared.isNetworkActivityIndicatorVisible = true
-      view.showAnimatedGradientSkeleton()
+      activityIndicator.setRandomType()
+      activityIndicator.startAnimating()
       
     case .fetched(let viewModel):
       displayFetchedCoins(with: viewModel)
@@ -146,7 +162,7 @@ extension CoinListViewController {
   func displayFetchedCoins(with viewModel: ViewModel) {
     UIApplication.shared.isNetworkActivityIndicatorVisible = false
     self.viewModel = viewModel
-    self.view.hideSkeleton(reloadDataAfter: false)
+    self.activityIndicator.stopAnimating()
     
     tableView.reloadData() {
       if viewModel.count != 0 {
@@ -182,7 +198,7 @@ extension CoinListViewController {
     
     switch state {
     case .emptyData, .fetching:
-      cell.prepareForSkeleton()
+      return
       
     default:
       let coin = viewModel.coins[indexPath.row]
@@ -192,23 +208,41 @@ extension CoinListViewController {
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 90
+    return viewModel.cellHeights[indexPath.row]
   }
   
-  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    return tableHeaderView
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath) else {
+      return
+    }
+    
+    var duration = 0.0
+    if viewModel.cellHeights[indexPath.row] == CoinListCell.CellHeight.close {
+      viewModel.cellHeights[indexPath.row] = CoinListCell.CellHeight.open
+      cell.unfold(true, animated: true, completion: nil)
+      duration = 0.5
+    } else {
+      viewModel.cellHeights[indexPath.row] = CoinListCell.CellHeight.close
+      cell.unfold(false, animated: true, completion: nil)
+      duration = 0.8
+    }
+    
+    UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
+      tableView.beginUpdates()
+      tableView.endUpdates()
+    })
   }
 }
 
 
-// MARK: - SkeletonTableViewDataSource
-extension CoinListViewController: SkeletonTableViewDataSource {
-  func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-    return CoinListCell.identifier
+// MARK: - UITableViewPrefetchDataSource
+extension CoinListViewController: UITableViewDataSourcePrefetching {
+  func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+    print("prefetchRowsAt \(indexPaths)")
   }
   
-  func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return state.isFetching ? 30 : viewModel.count
+  func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+    print("cancelPrefetchingForRowsAt \(indexPaths)")
   }
 }
 
