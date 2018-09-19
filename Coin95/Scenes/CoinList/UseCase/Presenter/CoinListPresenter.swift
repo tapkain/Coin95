@@ -20,15 +20,16 @@ extension CoinListPresenter: CoinListPresentable {
     let viewModel = CoinListViewModel(
       coins: coins,
       setup: {
-        CoinViewModel(
+        let tradingInfo = $0.tradingInfo(for: request.currency)
+        
+        return CoinViewModel(
           coinName: $0.name,
-          imageUrl: $0.imageUrl,
           symbol: $0.symbol,
-          price: Formatter.currency.string(from: $0.tradingInfo(for: request.currency).price)!
-//          priceChange: CoinViewModel.PriceChange(
-//            delta: Formatter.priceChange($0.tradingInfo(for: request.currency).pricePercentChange),
-//            color: self.color(for: $0.tradingInfo(for: request.currency).pricePercentChange)
-//          )
+          imageUrl: $0.imageUrl,
+          history24h: $0.historicalInfo.map {
+            return (x: Double($0.time), y: $0.close)
+          },
+          price: Formatter.currency.string(from: tradingInfo.price)!
         )
     })
     

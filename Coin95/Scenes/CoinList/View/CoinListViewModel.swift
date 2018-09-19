@@ -8,7 +8,6 @@
 
 import Foundation
 import RealmSwift
-import Charts
 
 struct CoinListViewModel {
   var cellHeights = [CGFloat]()
@@ -23,22 +22,22 @@ struct CoinListViewModel {
   }
   
   init(coins: Results<Coin>! = nil, setup: ((Coin) -> CoinViewModel)! = nil) {
-    if let coins = coins {
-      cellHeights = CoinListCell.cellHeights(coins.count)
-    }
     self.coins = coins
     self.setup = setup
+    cellHeights = calculateCellHeights()
+  }
+  
+  private func calculateCellHeights() -> [CGFloat] {
+    return (0..<count).map { _ in CoinListCell.CellHeight.close }
   }
 }
 
 struct CoinViewModel {
   let coinName: String
-  let imageUrl: URL?
   let symbol: String
+  let imageUrl: URL?
+  let history24h: [(x: Double, y: Double)]
   let price: String
-//  let priceChange1h: PriceChange
-//  let priceChange24h: PriceChange
-//  let priceChange7d: PriceChange
   
   struct PriceChange {
     let delta: String

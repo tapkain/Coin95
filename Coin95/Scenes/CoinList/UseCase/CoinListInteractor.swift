@@ -11,6 +11,7 @@ import Promises
 
 struct CoinListInteractor {
   private let coinListWorker: CoinListWorker = CoinListCacheWorker()
+  private let coinHistoryWorker = CoinListHistoryWorker()
   private let presenter: CoinListPresentable
   
   init(presenter: CoinListPresentable) {
@@ -33,6 +34,11 @@ extension CoinListInteractor: CoinListUseCase {
     }.catch {
       self.handle(error: $0)
     }
+  }
+  
+  func fetchHistory(for coin: Coin, _ request: CoinListRequest) -> Promise<Void> {
+    print("Interactor.fetchHistory(). Request:\n \(request.description)\n\n")
+    return coinHistoryWorker.fetchHistory(coin, request)
   }
   
   private func handle(error: Error) {

@@ -11,4 +11,5 @@ import Promises
 
 protocol CoinListUseCase {
   func fetchCoins(_ request: CoinListRequest) -> Promise<CoinListViewModel>
+  func fetchHistory(for coin: Coin, _ request: CoinListRequest) -> Promise<Void>
 }

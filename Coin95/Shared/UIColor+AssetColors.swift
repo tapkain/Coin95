@@ -9,8 +9,6 @@
 import UIKit
 
 extension UIColor {
-  static let mangoTango = UIColor(named: "mangoTango")!
-  static let rajah = UIColor(named: "rajah")!
-  static let topaz = UIColor(named: "topaz")!
-  static let purpleNavi = UIColor(named: "purpleNavi")!
+  static let platinum = UIColor(named: "platinum")!
+  static let yankeesBlue = UIColor(named: "yankeesBlue")!
 }

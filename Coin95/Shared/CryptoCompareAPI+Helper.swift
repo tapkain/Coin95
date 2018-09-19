@@ -24,4 +24,19 @@ extension CryptoCompareAPI {
       }
     }
   }
+  
+//  func send<T: APIRequest>(_ request: T) -> Promise<(T.Response, URLSessionDataTask)> {
+//    return Promise { fulfill, reject in
+//      var task: URLSessionDataTask!
+//      task = self.send(request) {
+//        switch $0 {
+//        case .success(let value):
+//          fulfill((value, task))
+//          
+//        case .failure(let error):
+//          reject(error)
+//        }
+//      }
+//    }
+//  }
 }

@@ -22,11 +22,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.rootViewController = appCoordinator.rootViewController
     appCoordinator.start()
     window?.makeKeyAndVisible()
+    setTheme()
     
     return true
   }
   
   func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+  }
+  
+  func setTheme() {
+    UINavigationBar.appearance().barTintColor = .black
+    UINavigationBar.appearance().tintColor = .white
+    UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+    UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+    UINavigationBar.appearance().isTranslucent = false
   }
 }
 
