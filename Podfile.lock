@@ -16,6 +16,7 @@ PODS:
   - Realm/Headers (3.9.0)
   - RealmSwift (3.9.0):
     - Realm (= 3.9.0)
+  - Segmentio (3.0)
   - SwifterSwift (4.4.0):
     - SwifterSwift/AppKit (= 4.4.0)
     - SwifterSwift/CoreGraphics (= 4.4.0)
@@ -44,6 +45,7 @@ DEPENDENCIES:
   - PromisesSwift
   - Reachability
   - RealmSwift
+  - Segmentio
   - SwifterSwift
 
 SPEC REPOS:
@@ -59,6 +61,7 @@ SPEC REPOS:
     - Reachability
     - Realm
     - RealmSwift
+    - Segmentio
     - SwifterSwift
 
 SPEC CHECKSUMS:
@@ -73,8 +76,9 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Realm: 3d36f208bf3aff8335dc3298742140182bde4edb
   RealmSwift: aa4d11917bfcfaa3ed51f219102a487ecd895447
+  Segmentio: 1607fba3b42230f5f91e997d1a3f337f1176674c
   SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
 
-PODFILE CHECKSUM: 674301b40e367e2eecd1f23c8e4fc28f96ff18a9
+PODFILE CHECKSUM: b63922eb713898b87e65ef1a08068a9aa2eac70a
 
 COCOAPODS: 1.5.3

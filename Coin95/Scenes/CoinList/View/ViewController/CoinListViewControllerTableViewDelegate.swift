@@ -32,7 +32,8 @@ extension CoinListViewController {
     default:
       let coin = viewModel.coins[indexPath.row]
       let cellViewModel = viewModel.setup(coin)
-      cell.bind(to: cellViewModel)
+      cell.setupCloseCell(with: cellViewModel)
+      //cell.bind(to: cellViewModel)
     }
   }
   
@@ -69,9 +70,7 @@ extension CoinListViewController: UITableViewDataSourcePrefetching {
   func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
     indexPaths.forEach {
       let coin = viewModel.coins[$0.row]
-      useCase.fetchHistory(for: coin, useCaseRequest).then {
-        print("Fetched succesfull!")
-      }
+      useCase.fetchHistory(for: coin, useCaseRequest)
     }
   }
 }

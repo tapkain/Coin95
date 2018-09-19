@@ -10,15 +10,10 @@ import Foundation
 import CryptoCompareAPI
 import Promises
 
-struct CoinListHistoryWorker {
-  enum HistoryPeriod {
-    case for24h
-    case for7d
-  }
+struct CoinListHistoryWorker: CoinListHistoryFetcher {
+  let api: CryptoCompareAPI
   
-  let api = CryptoCompareAPI(applicationName: nil, logRequests: true)
-  
-  func fetchHistory(_ coin: Coin, _ request: CoinListRequest, for period: HistoryPeriod = .for24h) -> Promise<Void> {
+  func fetchHistory(for coin: Coin, _ request: CoinListRequest) -> Promise<Void> {
     let apiRequest = GetHistoricalHourlyRequest(fsym: coin.symbol, tsym: request.currency, e: Exchange(rawValue: request.exchange)!)
     
     return api.send(apiRequest).then { history in

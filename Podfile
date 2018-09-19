@@ -13,4 +13,5 @@ target 'Coin95' do
   pod 'SwifterSwift'
   pod 'FoldingCell'
   pod 'lottie-ios'
+  pod 'Segmentio'
 end

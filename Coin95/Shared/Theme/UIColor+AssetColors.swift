@@ -11,4 +11,6 @@ import UIKit
 extension UIColor {
   static let platinum = UIColor(named: "platinum")!
   static let yankeesBlue = UIColor(named: "yankeesBlue")!
+  static let aquaLight = UIColor(named: "aquaLight")!
+  static let aquaDark = UIColor(named: "aquaDark")!
 }

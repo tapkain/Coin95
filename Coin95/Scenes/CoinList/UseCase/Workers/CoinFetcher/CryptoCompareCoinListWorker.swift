@@ -10,19 +10,21 @@ import Foundation
 import CryptoCompareAPI
 import Promises
 
-struct CryptoCompareCoinListWorker {
+struct CryptoCompareCoinListWorker: CoinListCoinFetcher {
   private let api: CryptoCompareAPI
   private let tradingInfoWorker: CryptoCompareTradingInfoWorker
   
-  init() {
-    api = CryptoCompareAPI(applicationName: nil, logRequests: false)
+  init(api: CryptoCompareAPI) {
+    self.api = api
     tradingInfoWorker = CryptoCompareTradingInfoWorker(api: api)
   }
   
-  func fetchCoins(_ request: CoinListRequest) -> Promise<Void> {
+  func fetchCoins(_ request: CoinListRequest) -> Promise<Coin.FetchResult> {
     return api.send(GetCoinListRequest()).then { coinList in
       self.tradingInfoWorker.fetchTradingInfo(for: coinList, with: request).then {
         self.save(coinList, tradingInfo: $0, request)
+      }.then {_ in
+        self.fetchLocal(request)
       }
     }
   }
@@ -40,6 +42,15 @@ struct CryptoCompareCoinListWorker {
       }
       
       fulfill(())
+    }
+  }
+  
+  // TODO: Think how to remove duplicate method with CoinListCacheWorker
+  private func fetchLocal(_ request: CoinListRequest) -> Promise<Coin.FetchResult> {
+    return Promise { fulfill, _ in
+      DispatchQueue.main.async {
+        fulfill(Coin.fetchAll(for: request))
+      }
     }
   }
 }

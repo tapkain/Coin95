@@ -55,18 +55,35 @@
                                                         <constraint firstItem="mgu-cC-XX4" firstAttribute="centerY" secondItem="Rzg-Gv-ZNv" secondAttribute="centerY" id="zwW-qk-NoX"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBC-B8-Ar1">
-                                                    <rect key="frame" x="39" y="58" width="240" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OBC-B8-Ar1">
+                                                    <rect key="frame" x="0.0" y="40" width="359" height="228"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wyR-nW-ESA" customClass="Segmentio" customModule="Segmentio">
+                                                            <rect key="frame" x="0.0" y="188" width="359" height="40"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="9PO-ox-MMn"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="wyR-nW-ESA" secondAttribute="trailing" id="JPO-Xd-nWJ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="wyR-nW-ESA" secondAttribute="bottom" id="R79-kf-XWp"/>
+                                                        <constraint firstItem="wyR-nW-ESA" firstAttribute="leading" secondItem="OBC-B8-Ar1" secondAttribute="leading" id="byq-12-keH"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" name="yankeesBlue"/>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="OBC-B8-Ar1" secondAttribute="trailing" id="5mr-xP-vIF"/>
+                                                <constraint firstItem="OBC-B8-Ar1" firstAttribute="height" secondItem="lsL-lU-7wt" secondAttribute="height" multiplier="0.5" id="64e-Qz-h8x"/>
                                                 <constraint firstItem="Rzg-Gv-ZNv" firstAttribute="width" secondItem="lsL-lU-7wt" secondAttribute="width" id="921-1L-uK5"/>
+                                                <constraint firstItem="OBC-B8-Ar1" firstAttribute="leading" secondItem="lsL-lU-7wt" secondAttribute="leading" id="LX8-Ww-1V1"/>
                                                 <constraint firstItem="Rzg-Gv-ZNv" firstAttribute="leading" secondItem="lsL-lU-7wt" secondAttribute="leading" id="MHU-M5-s8i"/>
                                                 <constraint firstAttribute="trailing" secondItem="Rzg-Gv-ZNv" secondAttribute="trailing" id="QYw-1Q-foo"/>
                                                 <constraint firstAttribute="height" constant="456" id="SLB-bH-7jF"/>
+                                                <constraint firstItem="OBC-B8-Ar1" firstAttribute="top" secondItem="Rzg-Gv-ZNv" secondAttribute="bottom" id="iO5-xe-XR8"/>
                                                 <constraint firstItem="Rzg-Gv-ZNv" firstAttribute="top" secondItem="lsL-lU-7wt" secondAttribute="top" id="wBK-eH-eqx"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
@@ -180,11 +197,11 @@
                                     <outlet property="foregroundView" destination="4Uc-5w-TPn" id="pZd-BC-lpr"/>
                                     <outlet property="foregroundViewTop" destination="2W2-Hh-cyL" id="88k-6p-5Ga"/>
                                     <outlet property="history24hView" destination="ybK-4f-LEU" id="UAA-sE-T2r"/>
+                                    <outlet property="historySegmentControl" destination="wyR-nW-ESA" id="xqE-ae-EPJ"/>
                                     <outlet property="leftTopView" destination="2Jp-WU-pCe" id="8cX-dG-KBY"/>
                                     <outlet property="name" destination="XwA-6T-6l5" id="jNz-3Q-8Bk"/>
                                     <outlet property="price" destination="y49-ai-eMQ" id="V5h-tA-kz3"/>
                                     <outlet property="symbol" destination="Mbh-NZ-Ads" id="4zV-NK-nMm"/>
-                                    <outlet property="topView" destination="Rzg-Gv-ZNv" id="GGQ-8a-EDC"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

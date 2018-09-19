@@ -12,14 +12,31 @@ import Kingfisher
 import FoldingCell
 import SwifterSwift
 import Charts
+import Segmentio
 
 class CoinListCell: FoldingCell {
+  enum ViewState {
+    case closed
+    case open
+  }
+  
+  var state = ViewState.closed
+  
   struct CellHeight {
     static let close: CGFloat = 85
     static let open: CGFloat = 470
   }
   
   static let identifier = "CoinListCell"
+  static let segmentItems = [
+    SegmentioItem(title: "1H", image: nil),
+    SegmentioItem(title: "24H", image: nil),
+    SegmentioItem(title: "7D", image: nil),
+    SegmentioItem(title: "1M", image: nil),
+    SegmentioItem(title: "3M", image: nil),
+    SegmentioItem(title: "1Y", image: nil),
+    SegmentioItem(title: "ALL", image: nil),
+  ]
   
   // MARK: - Closed Cell
   @IBOutlet weak var history24hView: LineChartView!
@@ -30,7 +47,7 @@ class CoinListCell: FoldingCell {
   @IBOutlet weak var coinImage: UIImageView!
   
   // MARK: - Open Cell
-  @IBOutlet weak var topView: UIView!
+  @IBOutlet weak var historySegmentControl: Segmentio!
   
   @objc open override func animationDuration(_ itemIndex: NSInteger, type: AnimationType) -> TimeInterval {
     let durations = [0.33, 0.26, 0.26]
@@ -40,7 +57,21 @@ class CoinListCell: FoldingCell {
 
 
 extension CoinListCell {
-  func bind(to viewModel: CoinViewModel) {
+  func setupOpenCell(with viewModel: CoinViewModel) {
+    historySegmentControl.setup(
+      content: CoinListCell.segmentItems,
+      style: .onlyLabel,
+      options: Segmentio.defaultOptions
+    )
+    
+    historySegmentControl.valueDidChange = { _, _ in
+      //fetch from use case data and display
+    }
+    
+    historySegmentControl.selectedSegmentioIndex = 1
+  }
+  
+  func setupCloseCell(with viewModel: CoinViewModel) {
     price.text = viewModel.price
     name.text = viewModel.coinName
     symbol.text = viewModel.symbol

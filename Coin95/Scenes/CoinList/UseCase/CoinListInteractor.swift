@@ -10,8 +10,7 @@ import Foundation
 import Promises
 
 struct CoinListInteractor {
-  private let coinListWorker: CoinListWorker = CoinListCacheWorker()
-  private let coinHistoryWorker = CoinListHistoryWorker()
+  private let coinListCache: CoinListHistoryFetcher & CoinListCoinFetcher = CoinListCacheWorker()
   private let presenter: CoinListPresentable
   
   init(presenter: CoinListPresentable) {
@@ -22,9 +21,9 @@ struct CoinListInteractor {
 
 extension CoinListInteractor: CoinListUseCase {
   func fetchCoins(_ request: CoinListRequest) -> Promise<CoinListViewModel> {
-    print("Interactor.fetchCoins(). Request:\n \(request.description)\n\n")
+    print("\nFetch coins:\n \(request.description)\n")
     
-    return coinListWorker.fetchCoins(request).then { coins in
+    return coinListCache.fetchCoins(request).then { coins in
       return Promise { fulfill, _ in
         DispatchQueue.main.async {
           let viewModel = self.presenter.present(coins: coins, request)
@@ -36,9 +35,9 @@ extension CoinListInteractor: CoinListUseCase {
     }
   }
   
-  func fetchHistory(for coin: Coin, _ request: CoinListRequest) -> Promise<Void> {
-    print("Interactor.fetchHistory(). Request:\n \(request.description)\n\n")
-    return coinHistoryWorker.fetchHistory(coin, request)
+  func fetchHistory(for coin: Coin, _ request: CoinListRequest) {
+    print("Fetch history for \(coin.symbol)")
+    _ = coinListCache.fetchHistory(for: coin, request)
   }
   
   private func handle(error: Error) {

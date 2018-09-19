@@ -11,19 +11,30 @@ import Reachability
 import Promises
 import CryptoCompareAPI
 
-struct CoinListCacheWorker: CoinListWorker {
-  private let apiWorker = CryptoCompareCoinListWorker()
+struct CoinListCacheWorker: CoinListHistoryFetcher, CoinListCoinFetcher {
+  private let api: CryptoCompareAPI
+  private let coinFetcher: CoinListCoinFetcher
+  private let historyFetcher: CoinListHistoryFetcher
+  
+  init() {
+    api = CryptoCompareAPI(applicationName: nil, logRequests: false)
+    coinFetcher = CryptoCompareCoinListWorker(api: api)
+    historyFetcher = CoinListHistoryWorker(api: api)
+  }
   
   func fetchCoins(_ request: CoinListRequest) -> Promise<Coin.FetchResult> {
     if shouldFetchFromAPI() {
-      print("CoinListCacheWorker - Fetching from API")
-      return apiWorker.fetchCoins(request).then {
-        self.fetchLocal(request)
-      }
+      return coinFetcher.fetchCoins(request)
     }
     
-    print("CoinListCacheWorker - Fething from local DB")
-    return fetchLocal(request)
+    return fetchCoinsLocal(request)
+  }
+  
+  func fetchHistory(for coin: Coin, _ request: CoinListRequest) -> Promise<Void> {
+    if shouldFetchFromAPI() {
+      return historyFetcher.fetchHistory(for: coin, request)
+    }
+    return Promise(())
   }
   
   func shouldFetchFromAPI() -> Bool {
@@ -35,10 +46,11 @@ struct CoinListCacheWorker: CoinListWorker {
     //} else return false
     //add error handling
     //return Reachability.forInternetConnection().isReachable()
-    return true
+    return false
   }
   
-  private func fetchLocal(_ request: CoinListRequest) -> Promise<Coin.FetchResult> {
+  // TODO: Duplicate with worker
+  private func fetchCoinsLocal(_ request: CoinListRequest) -> Promise<Coin.FetchResult> {
     return Promise { fulfill, _ in
       DispatchQueue.main.async {
         fulfill(Coin.fetchAll(for: request))
